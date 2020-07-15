@@ -21,7 +21,7 @@ export const handle = (req: NowRequest, res: NowResponse) => {
       return titles.map(
         (title): IPage => ({
           title,
-          url: `/api/page/${title}`,
+          url: `/api/page/${encodeURIComponent(title)}`,
         })
       );
     })
