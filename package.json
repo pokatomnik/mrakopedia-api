@@ -23,5 +23,7 @@
     "vercel": "^19.1.2",
     "wikijs": "^6.0.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }

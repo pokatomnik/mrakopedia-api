@@ -12,3 +12,24 @@ export const stringify = <T extends unknown>(
 
   return Array.isArray(input) ? input.map(toString).join('') : toString(input);
 };
+
+export const makeSearch = <T extends Record<string, string>>(params: T) => {
+  return Object.entries(params).reduce((searchString, [key, value]) => {
+    return searchString + `&${key}=${value}`;
+  }, '');
+};
+
+export const Error = (id: string, message: string) => ({
+  error: id,
+  errorMessage: message,
+});
+
+interface IPageResponse {
+  title: string;
+  url: string;
+}
+
+export const makePageResponse = (title: string): IPageResponse => ({
+  title,
+  url: `/api/page/${encodeURIComponent(title)}`,
+});
