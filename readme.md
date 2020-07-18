@@ -32,6 +32,12 @@ Get all pages by category
 /api/categories/CATEGORY_NAME
 ```
 
+Get random page
+
+```
+/api/random
+```
+
 Please note, `SEARCH_KEYWORD`, `TITLE`, and `CATEGORY_NAME` should be escaped first.
 
 ## Running dev server
