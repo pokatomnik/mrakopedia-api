@@ -45,6 +45,9 @@ export class Page {
               </style>
           </head>
           <body>
+              <h1>
+                ${this.title}
+              </h1>
               ${this.html}
           </body>
       </html>
