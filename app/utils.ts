@@ -13,8 +13,13 @@ export const stringify = <T extends unknown>(
   return Array.isArray(input) ? input.map(toString).join('') : toString(input);
 };
 
-export const makeSearch = <T extends Record<string, string>>(params: T) => {
+export const makeSearch = <T extends Record<string, string | undefined>>(
+  params: T
+) => {
   return Object.entries(params).reduce((searchString, [key, value]) => {
+    if (value === undefined) {
+      return searchString;
+    }
     return searchString + `&${key}=${value}`;
   }, '');
 };
