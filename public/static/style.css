@@ -1,0 +1,32 @@
+a[href^='http'],
+a[href^='\/wiki'] {
+  text-decoration: none;
+  pointer-events: none;
+  color: inherit;
+  cursor: text;
+}
+
+div.embedvideo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.embedvideo > iframe {
+  visibility: hidden;
+}
+
+div.embedvideo::before {
+  content: 'Здесь должно быть видео, но оно не поддерживается';
+  z-index: 111;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed orange;
+}

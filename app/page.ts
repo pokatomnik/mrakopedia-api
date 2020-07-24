@@ -2,6 +2,7 @@ export const IGNORE_SELECTORS = [
   'div.box',
   'span.tocnumber',
   'span.mw-editsection',
+  'div.spoilers-button-container',
   'div.rating_box',
   'img',
 ];
@@ -33,10 +34,10 @@ export class Page {
   public render() {
     return `
       <!doctype html>
-      <html prefix="og: http://ogp.me/ns#">
+      <html>
           <head>
               <meta charset="utf-8" />
-              <meta property="og:url" content="https://mylink.com" />
+              <link rel="stylesheet" href="/static/style.css" />
               <title>${this.title}</title>
               <style>
                   ${this.ignoreList.join(', ')} {
