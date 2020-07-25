@@ -38,6 +38,12 @@ Get random page
 /api/random
 ```
 
+Get stories of the month
+
+```
+/api/hotm
+```
+
 Please note, `SEARCH_KEYWORD`, `TITLE`, and `CATEGORY_NAME` should be escaped first.
 
 ## Running dev server
