@@ -38,3 +38,11 @@ export const makePageResponse = (title: string): IPageResponse => ({
   title,
   url: `/api/page/${encodeURIComponent(title)}`,
 });
+
+export const capitalize = (input: string) => {
+  if (input.length === 0) {
+    return input;
+  }
+
+  return `${input.slice(0, 1).toLocaleUpperCase()}${input.slice(1)}`;
+};
