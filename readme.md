@@ -26,6 +26,12 @@ Get the pages related to page with TITLE:
 /api/page/TITLE/related
 ```
 
+Get the categories related to page with TITLE:
+
+```
+/api/page/TITLE/categories
+```
+
 Get all categories (500 max)
 
 ```

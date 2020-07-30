@@ -39,6 +39,11 @@ export const makePageResponse = (title: string): IPageResponse => ({
   url: `/api/page/${encodeURIComponent(title)}`,
 });
 
+export const makeCategoryResponse = (categoryName: string) => ({
+  title: categoryName,
+  url: `/api/categories/${encodeURIComponent(categoryName)}`,
+});
+
 export const capitalize = (input: string) => {
   if (input.length === 0) {
     return input;

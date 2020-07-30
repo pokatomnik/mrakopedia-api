@@ -1,6 +1,6 @@
 import { NowResponse } from '@vercel/node';
 import Axios, { AxiosResponse } from 'axios';
-import { makeSearch, Error } from '../../app/utils';
+import { makeSearch, Error, makeCategoryResponse } from '../../app/utils';
 import { MRAKOPEDIA_API_ENDPOINT } from '../../app/constants';
 import { IWikiQueryResponse } from '../../app/IWikiQueryResponse';
 
@@ -41,17 +41,8 @@ export default (_: unknown, response: NowResponse) => {
     AxiosResponse<IWikiQueryResponse<'allcategories', Array<ICategoryEntry>>>
   >(`${MRAKOPEDIA_API_ENDPOINT}?${searchString}`)
     .then((res) => res.data.query.allcategories.map(({ '*': entry }) => entry))
-    .then((entryNames) =>
-      entryNames.filter(
-        (entryName) => !exceptions.includes(entryName.toLocaleLowerCase())
-      )
-    )
-    .then((entries) =>
-      entries.map((entry) => ({
-        title: entry,
-        url: `/api/categories/${encodeURIComponent(entry)}`,
-      }))
-    )
+    .then()
+    .then((entries) => entries.map(makeCategoryResponse))
     .then((entries) => {
       response.json(entries);
     })
