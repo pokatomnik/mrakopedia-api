@@ -41,7 +41,11 @@ export default (_: unknown, response: NowResponse) => {
     AxiosResponse<IWikiQueryResponse<'allcategories', Array<ICategoryEntry>>>
   >(`${MRAKOPEDIA_API_ENDPOINT}?${searchString}`)
     .then((res) => res.data.query.allcategories.map(({ '*': entry }) => entry))
-    .then()
+    .then((entryNames) =>
+      entryNames.filter(
+        (entryName) => !exceptions.includes(entryName.toLocaleLowerCase())
+      )
+    )
     .then((entries) => entries.map(makeCategoryResponse))
     .then((entries) => {
       response.json(entries);
