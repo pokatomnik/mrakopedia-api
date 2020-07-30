@@ -4,7 +4,8 @@
   "description": "Mrakopedia JSON API",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
+    "tscheck": "tsc --noEmit",
+    "test": "npm run tscheck",
     "start": "vercel dev",
     "deploy:dev": "vercel",
     "deploy:prod": "vercel --prod"
