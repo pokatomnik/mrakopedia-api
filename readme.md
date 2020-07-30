@@ -20,6 +20,12 @@ Get Reader-friendly HTML
 /api/page/TITLE
 ```
 
+Get the pages related to page with TITLE:
+
+```
+/api/page/TITLE/related
+```
+
 Get all categories (500 max)
 
 ```
