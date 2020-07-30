@@ -1,3 +1,5 @@
+import { capitalize } from './utils';
+
 /**
  * Very simple page template renderer,
  * Probably It will be replaced with something
@@ -14,19 +16,21 @@ export class Page {
   }
 
   public render() {
+    const title = capitalize(this.title);
     return `
       <!doctype html>
       <html>
           <head>
               <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1">
               <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap-reboot.css" />
               <link rel="stylesheet" href="/static/overrides.css" />
               <link rel="stylesheet" href="/static/custom-styles.css" />
-              <title>${this.title}</title>
+              <title>${title}</title>
           </head>
           <body>
               <h1>
-                ${this.title}
+                ${title}
               </h1>
               ${this.html}
           </body>
