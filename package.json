@@ -7,8 +7,8 @@
     "tscheck": "tsc --noEmit",
     "test": "npm run tscheck",
     "start": "vercel dev",
-    "deploy:dev": "vercel",
-    "deploy:prod": "vercel --prod"
+    "deploy:dev": "tscheck && vercel",
+    "deploy:prod": "tscheck && vercel --prod"
   },
   "repository": {
     "type": "git",
