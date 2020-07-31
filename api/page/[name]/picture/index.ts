@@ -1,12 +1,10 @@
 import Axios from 'axios';
 import { NowRequest, NowResponse } from '@vercel/node';
-import { stringify, Error } from '../../../../app/utils';
+import { stringify } from '../../../../app/utils';
 import { wiki } from '../../../../app/Wiki';
 
-const FETCH_IMAGE_FAILED_ERROR = Error(
-  'IMAGE_FETCH_FAILED',
-  'Failed to fetch image'
-);
+const SVG_CONTENTS = `<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" viewBox="0 0 0 0" />`;
+const CONTENT_TYPE_SVG = 'image/svg+xml';
 
 const CONTENT_TYPE_KEY = 'content-type';
 const CONTENT_LENGTH_KEY = 'content-length';
@@ -14,8 +12,8 @@ const CONTENT_LENGTH_KEY = 'content-length';
 export default async (request: NowRequest, response: NowResponse) => {
   const name = stringify(request.query.name);
   if (!name) {
-    response.status(404).setHeader('Content-Type', 'image/png');
-    response.send('');
+    response.setHeader(CONTENT_TYPE_KEY, CONTENT_TYPE_SVG);
+    response.send(SVG_CONTENTS);
     return;
   }
 
@@ -24,13 +22,14 @@ export default async (request: NowRequest, response: NowResponse) => {
   try {
     imageUrl = await wiki.page(name).then((page) => page.mainImage());
   } catch {
-    response.status(500).json(FETCH_IMAGE_FAILED_ERROR);
+    response.setHeader(CONTENT_TYPE_KEY, CONTENT_TYPE_SVG);
+    response.send(SVG_CONTENTS);
     return;
   }
 
   if (!imageUrl) {
-    response.status(404).setHeader('Content-Type', 'image/png');
-    response.send('');
+    response.setHeader(CONTENT_TYPE_KEY, CONTENT_TYPE_SVG);
+    response.send(SVG_CONTENTS);
     return;
   }
 
@@ -48,6 +47,7 @@ export default async (request: NowRequest, response: NowResponse) => {
     );
     response.send(imageResponse.data);
   } catch (err) {
-    response.status(500).json(FETCH_IMAGE_FAILED_ERROR);
+    response.setHeader(CONTENT_TYPE_KEY, CONTENT_TYPE_SVG);
+    response.send(SVG_CONTENTS);
   }
 };
