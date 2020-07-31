@@ -38,6 +38,12 @@ Get the main picture related to page with TITLE:
 /api/page/TITLE/picture
 ```
 
+Get the source url for the page with TITLE:
+
+```
+/api/page/TITLE/source
+```
+
 Get all categories (500 max)
 
 ```

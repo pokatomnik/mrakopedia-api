@@ -1,5 +1,5 @@
 export const stringify = <T extends unknown>(
-  input: T | Array<T>,
+  input: T | Array<T> | undefined,
   toString: (value: T) => string = String
 ) => {
   if (input === undefined) {
@@ -10,7 +10,7 @@ export const stringify = <T extends unknown>(
     return '';
   }
 
-  return Array.isArray(input) ? input.map(toString).join('') : toString(input);
+  return Array.isArray(input) ? toString(input[0]) : toString(input);
 };
 
 export const makeSearch = <T extends Record<string, string | undefined>>(
@@ -29,7 +29,7 @@ export const Error = (id: string, message: string) => ({
   errorMessage: message,
 });
 
-interface IPageResponse {
+export interface IPageResponse {
   title: string;
   url: string;
 }
