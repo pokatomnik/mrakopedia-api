@@ -1,6 +1,6 @@
 import { NowRequest, NowResponse } from '@vercel/node';
-import { stringify, Error, makePageResponse } from '../../../app/utils';
-import { wiki } from '../../../app/Wiki';
+import { stringify, Error, makePageResponse } from '../../app/utils';
+import { wiki } from '../../app/Wiki';
 
 export default (req: NowRequest, res: NowResponse) => {
   const query = stringify(req.query.query);

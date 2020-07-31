@@ -1,11 +1,13 @@
 import { NowRequest, NowResponse } from '@vercel/node';
-import { stringify, Error, makePageResponse } from '../../../../app/utils';
-import { wiki } from '../../../../app/Wiki';
+import { stringify, Error, makeCategoryResponse } from '../../../app/utils';
+import { wiki } from '../../../app/Wiki';
 
 const FETCH_LINKS_FAILED_ERROR = Error(
   'LINKS_FETCH_FAILED',
   'Failed to fetch links'
 );
+
+const SPLIT_BY = ':';
 
 export default async (req: NowRequest, res: NowResponse) => {
   const name = stringify(req.query.name);
@@ -14,18 +16,22 @@ export default async (req: NowRequest, res: NowResponse) => {
     return;
   }
 
-  let links: Array<string> | undefined = undefined;
+  let rawCategoryNames: Array<string> | undefined = undefined;
   try {
-    links = await wiki.page(name).then((page) => page.links());
+    rawCategoryNames = await wiki.page(name).then((page) => page.categories());
   } catch {
     res.status(500).json(FETCH_LINKS_FAILED_ERROR);
     return;
   }
 
-  if (links === undefined) {
+  if (rawCategoryNames === undefined) {
     res.status(500).json(FETCH_LINKS_FAILED_ERROR);
     return;
   }
 
-  res.json(links.map(makePageResponse));
+  const categoryNames = rawCategoryNames
+    .map((name) => name.split(SPLIT_BY)[1])
+    .filter(Boolean);
+
+  res.json(categoryNames.map(makeCategoryResponse));
 };

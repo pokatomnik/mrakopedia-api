@@ -1,7 +1,7 @@
 import { NowResponse } from '@vercel/node';
-import { wiki } from '../../app/Wiki';
-import { HISTORY_OF_THE_MONTH_PAGE_NAME } from '../../app/constants';
-import { Error, makePageResponse } from '../../app/utils';
+import { wiki } from '../app/Wiki';
+import { HISTORY_OF_THE_MONTH_PAGE_NAME } from '../app/constants';
+import { Error, makePageResponse } from '../app/utils';
 
 type InferPromise<T> = T extends PromiseLike<infer U> ? U : T;
 
