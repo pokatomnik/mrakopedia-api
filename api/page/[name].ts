@@ -1,9 +1,9 @@
 import { NowRequest, NowResponse } from '@vercel/node';
 import { Page as PageResponse } from 'wikijs';
 import { STATUS_CODES } from 'http';
-import { stringify } from '../../../app/utils';
-import { Page } from '../../../app/page';
-import { wiki } from '../../../app/Wiki';
+import { stringify } from '../../app/utils';
+import { Page } from '../../app/page';
+import { wiki } from '../../app/Wiki';
 
 const ERROR_404 = STATUS_CODES[404] ?? '';
 const ERROR_500 = STATUS_CODES[500] ?? '';

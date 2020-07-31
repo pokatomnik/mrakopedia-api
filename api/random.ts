@@ -1,6 +1,6 @@
 import { NowResponse } from '@vercel/node';
-import { wiki } from '../../app/Wiki';
-import { Error, makePageResponse } from '../../app/utils';
+import { wiki } from '../app/Wiki';
+import { Error, makePageResponse } from '../app/utils';
 
 export default async (_: unknown, response: NowResponse) => {
   let randomPageTitles: Array<string> | undefined = undefined;

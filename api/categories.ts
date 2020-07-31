@@ -1,8 +1,8 @@
 import { NowResponse } from '@vercel/node';
 import Axios, { AxiosResponse } from 'axios';
-import { makeSearch, Error, makeCategoryResponse } from '../../app/utils';
-import { MRAKOPEDIA_API_ENDPOINT } from '../../app/constants';
-import { IWikiQueryResponse } from '../../app/IWikiQueryResponse';
+import { makeSearch, Error, makeCategoryResponse } from '../app/utils';
+import { MRAKOPEDIA_API_ENDPOINT } from '../app/constants';
+import { IWikiQueryResponse } from '../app/IWikiQueryResponse';
 
 interface ICategoryEntry {
   '*': string;

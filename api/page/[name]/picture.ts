@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { NowRequest, NowResponse } from '@vercel/node';
-import { stringify } from '../../../../app/utils';
-import { wiki } from '../../../../app/Wiki';
+import { stringify } from '../../../app/utils';
+import { wiki } from '../../../app/Wiki';
 
 const SVG_CONTENTS = `<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" viewBox="0 0 0 0" />`;
 const CONTENT_TYPE_SVG = 'image/svg+xml';

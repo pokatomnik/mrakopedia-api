@@ -6,9 +6,9 @@ import {
   Error,
   makeSearch,
   makePageResponse,
-} from '../../../app/utils';
-import { IWikiQueryResponse } from '../../../app/IWikiQueryResponse';
-import { MRAKOPEDIA_API_ENDPOINT } from '../../../app/constants';
+} from '../../app/utils';
+import { IWikiQueryResponse } from '../../app/IWikiQueryResponse';
+import { MRAKOPEDIA_API_ENDPOINT } from '../../app/constants';
 
 interface IPageInfo {
   pageid: number;
