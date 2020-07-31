@@ -32,6 +32,12 @@ Get the categories related to page with TITLE:
 /api/page/TITLE/categories
 ```
 
+Get the main picture related to page with TITLE:
+
+```
+/api/page/TITLE/picture
+```
+
 Get all categories (500 max)
 
 ```
