@@ -18,8 +18,7 @@ summary::-webkit-details-marker {
   display: none;
 }
 
-.show-hide {
-  color: #cccccc;
-  font-size: 20px;
-  font-weight: normal;
+.page-header {
+  text-align: left;
+  text-decoration: underline dashed;
 }
