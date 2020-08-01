@@ -40,8 +40,8 @@ export class Page {
           <body>
               <details>
                 <summary>
-                  <h1>
-                    ${title}&#8287;<span class="show-hide">(показать/скрыть)</span>
+                  <h1 class="page-header">
+                    ${title}
                   </h1>
                 </summary>
                 <img
