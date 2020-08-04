@@ -1,6 +1,11 @@
 import { NowResponse } from '@vercel/node';
 import Axios, { AxiosResponse } from 'axios';
-import { makeSearch, Error, makeCategoryResponse } from '../app/utils';
+import {
+  makeSearch,
+  Error,
+  makeCategoryResponse,
+  makeSortFnBy,
+} from '../app/utils';
 import { MRAKOPEDIA_API_ENDPOINT } from '../app/constants';
 import { IWikiQueryResponse } from '../app/IWikiQueryResponse';
 
@@ -48,7 +53,7 @@ export default (_: unknown, response: NowResponse) => {
     )
     .then((entries) => entries.map(makeCategoryResponse))
     .then((entries) => {
-      response.json(entries);
+      response.json(entries.sort(makeSortFnBy('title')));
     })
     .catch(() => {
       response
