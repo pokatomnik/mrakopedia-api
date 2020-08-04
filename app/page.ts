@@ -1,22 +1,63 @@
 import { capitalize } from './utils';
 
+interface IOptions {
+  simpleTitle?: boolean;
+}
+
+const DEFAULT_OPTIONS: IOptions = {
+  simpleTitle: false,
+};
+
 /**
  * Very simple page template renderer,
  * Probably It will be replaced with something
  * more feature-rich
  */
 export class Page {
-  private readonly title: string;
-
-  private readonly html: string;
-
-  constructor(title: string, html: string) {
+  private readonly options: IOptions;
+  constructor(
+    private readonly title: string,
+    private readonly html: string,
+    options: IOptions = DEFAULT_OPTIONS
+  ) {
     this.title = title;
     this.html = html;
+    this.options = options;
+  }
+
+  private get capitalizedTitle() {
+    return capitalize(this.title);
+  }
+
+  private simpleTitle() {
+    return `
+      <h1>
+        ${this.capitalizedTitle}
+      </h1>
+    `;
+  }
+
+  private detailedTitle() {
+    return `
+    <details>
+      <summary>
+        <h1 class="page-header">
+          ${this.capitalizedTitle}
+        </h1>
+      </summary>
+      <img
+        src="/api/page/${this.title}/picture"
+        class="mrakopedia-reader-logo"
+        alt="Главное изображение"
+      />
+    </details>
+  `;
   }
 
   public render() {
-    const title = capitalize(this.title);
+    const heading = this.options.simpleTitle
+      ? this.simpleTitle()
+      : this.detailedTitle();
     return `
       <!doctype html>
       <html>
@@ -35,21 +76,10 @@ export class Page {
               <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap-reboot.css" />
               <link rel="stylesheet" href="/static/overrides.css" />
               <link rel="stylesheet" href="/static/custom-styles.css" />
-              <title>${title}</title>
+              <title>${this.capitalizedTitle}</title>
           </head>
           <body>
-              <details>
-                <summary>
-                  <h1 class="page-header">
-                    ${title}
-                  </h1>
-                </summary>
-                <img
-                  src="/api/page/${this.title}/picture"
-                  class="mrakopedia-reader-logo"
-                  alt="Главное изображение"
-                />
-              </details>
+              ${heading}
               ${this.html}
           </body>
       </html>
