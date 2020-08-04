@@ -71,3 +71,10 @@ export const fetchPageByName = async (name: string): Promise<WikiJSPage> => {
 
   return page;
 };
+
+export const makeSortFnBy = <
+  K extends string,
+  T extends { [key in K]: string }
+>(
+  key: K
+) => (a: T, b: T) => a[key].localeCompare(b[key]);

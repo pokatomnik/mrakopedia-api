@@ -1,5 +1,10 @@
 import { NowRequest, NowResponse } from '@vercel/node';
-import { stringify, Error, makeCategoryResponse } from '../../../app/utils';
+import {
+  stringify,
+  Error,
+  makeCategoryResponse,
+  makeSortFnBy,
+} from '../../../app/utils';
 import { wiki } from '../../../app/Wiki';
 
 const FETCH_LINKS_FAILED_ERROR = Error(
@@ -33,5 +38,5 @@ export default async (req: NowRequest, res: NowResponse) => {
     .map((name) => name.split(SPLIT_BY)[1])
     .filter(Boolean);
 
-  res.json(categoryNames.map(makeCategoryResponse));
+  res.json(categoryNames.map(makeCategoryResponse).sort(makeSortFnBy('title')));
 };

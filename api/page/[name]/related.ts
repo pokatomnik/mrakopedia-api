@@ -4,6 +4,7 @@ import {
   Error,
   makePageResponse,
   fetchPageByName,
+  makeSortFnBy,
 } from '../../../app/utils';
 import { Page as WikiJSPage } from 'wikijs';
 
@@ -40,5 +41,5 @@ export default async (req: NowRequest, res: NowResponse) => {
     links = [];
   }
 
-  res.json(links.map(makePageResponse));
+  res.json(links.map(makePageResponse).sort(makeSortFnBy('title')));
 };

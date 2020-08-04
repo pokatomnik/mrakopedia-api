@@ -6,6 +6,7 @@ import {
   Error,
   makeSearch,
   makePageResponse,
+  makeSortFnBy,
 } from '../../app/utils';
 import { IWikiQueryResponse } from '../../app/IWikiQueryResponse';
 import { MRAKOPEDIA_API_ENDPOINT } from '../../app/constants';
@@ -67,7 +68,7 @@ export default (request: NowRequest, response: NowResponse) => {
 
   preparePages(params)
     .then((pageResponses) => {
-      response.json(pageResponses);
+      response.json(pageResponses.sort(makeSortFnBy('title')));
     })
     .catch(() => {
       response
