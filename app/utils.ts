@@ -1,3 +1,6 @@
+import { Page as WikiJSPage } from 'wikijs';
+import { wiki } from './Wiki';
+
 export const stringify = <T extends unknown>(
   input: T | Array<T> | undefined,
   toString: (value: T) => string = String
@@ -50,4 +53,21 @@ export const capitalize = (input: string) => {
   }
 
   return `${input.slice(0, 1).toLocaleUpperCase()}${input.slice(1)}`;
+};
+
+export const fetchPageByName = async (name: string): Promise<WikiJSPage> => {
+  const pageError = new global.Error('No such page');
+  let page: WikiJSPage | undefined = undefined;
+
+  try {
+    page = await wiki.page(name);
+  } catch {
+    throw pageError;
+  }
+
+  if (page === undefined) {
+    throw pageError;
+  }
+
+  return page;
 };
