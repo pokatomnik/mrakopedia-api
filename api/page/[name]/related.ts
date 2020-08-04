@@ -1,6 +1,16 @@
 import { NowRequest, NowResponse } from '@vercel/node';
-import { stringify, Error, makePageResponse } from '../../../app/utils';
-import { wiki } from '../../../app/Wiki';
+import {
+  stringify,
+  Error,
+  makePageResponse,
+  fetchPageByName,
+} from '../../../app/utils';
+import { Page as WikiJSPage } from 'wikijs';
+
+const FETCH_PAGE_FAILED_ERROR = Error(
+  'PAGE_FETCH_FAILED',
+  'Failed to fetch page'
+);
 
 const FETCH_LINKS_FAILED_ERROR = Error(
   'LINKS_FETCH_FAILED',
@@ -14,17 +24,20 @@ export default async (req: NowRequest, res: NowResponse) => {
     return;
   }
 
+  let page: WikiJSPage | undefined = undefined;
   let links: Array<string> | undefined = undefined;
+
   try {
-    links = await wiki.page(name).then((page) => page.links());
+    page = await fetchPageByName(name);
   } catch {
-    res.status(500).json(FETCH_LINKS_FAILED_ERROR);
+    res.status(404).json(FETCH_PAGE_FAILED_ERROR);
     return;
   }
 
-  if (links === undefined) {
-    res.status(500).json(FETCH_LINKS_FAILED_ERROR);
-    return;
+  try {
+    links = await page.links();
+  } catch {
+    links = [];
   }
 
   res.json(links.map(makePageResponse));
