@@ -8,8 +8,8 @@ import { wiki } from '../../app/Wiki';
 const ERROR_404 = STATUS_CODES[404] ?? '';
 const ERROR_500 = STATUS_CODES[500] ?? '';
 
-const page404 = new Page(ERROR_404, ERROR_404);
-const page500 = new Page(ERROR_500, ERROR_500);
+const page404 = new Page(ERROR_404, ERROR_404, { simpleTitle: true });
+const page500 = new Page(ERROR_500, ERROR_500, { simpleTitle: true });
 
 export default async (req: NowRequest, res: NowResponse) => {
   const name = stringify(req.query.name);
