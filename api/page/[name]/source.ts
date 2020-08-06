@@ -1,5 +1,10 @@
 import { NowRequest, NowResponse } from '@vercel/node';
-import { stringify, Error, fetchPageByName } from '../../../app/utils';
+import {
+  stringify,
+  Error,
+  fetchPageByName,
+  allowCors,
+} from '../../../app/utils';
 import { wiki } from '../../../app/Wiki';
 import { Page as WikiJSPage } from 'wikijs';
 
@@ -13,7 +18,7 @@ const FETCH_PAGE_FAILED_ERROR = Error(
   'Failed to fetch page'
 );
 
-export default async (request: NowRequest, response: NowResponse) => {
+export default allowCors(async (request: NowRequest, response: NowResponse) => {
   const name = stringify(request.query.name);
   if (!name) {
     response.status(404).json(ERROR_NOT_FOUND);
@@ -46,4 +51,4 @@ export default async (request: NowRequest, response: NowResponse) => {
     title: name,
     url: sourceURL.toString(),
   });
-};
+});

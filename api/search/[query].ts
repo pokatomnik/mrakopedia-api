@@ -4,10 +4,11 @@ import {
   Error,
   makePageResponse,
   makeSortFnBy,
+  allowCors,
 } from '../../app/utils';
 import { wiki } from '../../app/Wiki';
 
-export default (req: NowRequest, res: NowResponse) => {
+export default allowCors((req: NowRequest, res: NowResponse) => {
   const query = stringify(req.query.query);
   if (!query) {
     res.json([]);
@@ -26,4 +27,4 @@ export default (req: NowRequest, res: NowResponse) => {
     .catch(() => {
       res.status(500).json(Error('FAILED_SEARCH_RESPONSE', 'Search failed'));
     });
-};
+});

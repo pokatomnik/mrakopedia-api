@@ -5,6 +5,7 @@ import {
   Error,
   makeCategoryResponse,
   makeSortFnBy,
+  allowCors,
 } from '../app/utils';
 import { MRAKOPEDIA_API_ENDPOINT } from '../app/constants';
 import { IWikiQueryResponse } from '../app/IWikiQueryResponse';
@@ -30,7 +31,7 @@ const exceptions = [
   'страницы с опросами',
 ];
 
-export default (_: unknown, response: NowResponse) => {
+export default allowCors((_: unknown, response: NowResponse) => {
   const params: Record<string, string> = {
     action: 'query',
     format: 'json',
@@ -60,4 +61,4 @@ export default (_: unknown, response: NowResponse) => {
         .status(500)
         .json(Error('FAILED_GET_CATEGORIES', 'Categories reqest failed'));
     });
-};
+});

@@ -5,6 +5,7 @@ import {
   makePageResponse,
   fetchPageByName,
   makeSortFnBy,
+  allowCors,
 } from '../../../app/utils';
 import { Page as WikiJSPage } from 'wikijs';
 
@@ -18,7 +19,7 @@ const FETCH_LINKS_FAILED_ERROR = Error(
   'Failed to fetch links'
 );
 
-export default async (req: NowRequest, res: NowResponse) => {
+export default allowCors(async (req: NowRequest, res: NowResponse) => {
   const name = stringify(req.query.name);
   if (!name) {
     res.status(404).json(Error('NO_PAGE_NAME', 'Missing page name'));
@@ -42,4 +43,4 @@ export default async (req: NowRequest, res: NowResponse) => {
   }
 
   res.json(links.map(makePageResponse).sort(makeSortFnBy('title')));
-};
+});

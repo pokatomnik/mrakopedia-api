@@ -1,8 +1,8 @@
 import { NowResponse } from '@vercel/node';
 import { wiki } from '../app/Wiki';
-import { Error, makePageResponse } from '../app/utils';
+import { Error, makePageResponse, allowCors } from '../app/utils';
 
-export default async (_: unknown, response: NowResponse) => {
+export default allowCors(async (_: unknown, response: NowResponse) => {
   let randomPageTitles: Array<string> | undefined = undefined;
   try {
     randomPageTitles = await wiki.random(1);
@@ -21,4 +21,4 @@ export default async (_: unknown, response: NowResponse) => {
   const firstRandom = randomPageTitles[0];
 
   response.json(makePageResponse(firstRandom));
-};
+});
