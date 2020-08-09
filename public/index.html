@@ -1,36 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <style>
-      body {
-        display: flex;
-        align-items: center;
-        width: 100vw;
-        height: 100vh;
-        justify-content: center;
-        margin: 0;
-        padding: 0;
-        flex-direction: column;
-      }
-      p.quote {
-        border-left: 5px solid #ffa73a;
-        display: inline-block;
-        padding-left: 10px;
-        max-width: 50%;
-        font-family: sans-serif;
-      }
-    </style>
     <meta charset="utf-8" />
-    <title>Привет</title>
+    <title>Mrakopedia Reader</title>
+    <link
+      rel="stylesheet"
+      href="//unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css"
+    />
+    <script defer type="module">
+      import Preact from '/static/js/preact.mjs';
+      import { App } from '/static/js/index.mjs';
+      Preact.render(Preact.createElement(App), document.body);
+    </script>
   </head>
-  <body>
-    <p class="quote">
-      Ребята, не стоит вскрывать эту тему. Вы молодые, шутливые, вам все легко.
-      Это не то. Это не Чикатило и даже не архивы спецслужб. Сюда лучше не
-      лезть. Серьезно, любой из вас будет жалеть. Лучше закройте тему и
-      забудьте, что тут писалось. Я вполне понимаю, что данным сообщением вызову
-      дополнительный интерес, но хочу сразу предостеречь пытливых - стоп.
-      Остальные просто не найдут.
-    </p>
-  </body>
+  <body></body>
 </html>
