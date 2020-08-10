@@ -4,17 +4,21 @@ import { style } from '../utils/style.mjs';
 const BUTTON_STYLE = style({ margin: '0 2px' });
 
 export class ActionButtons extends Preact.Component {
-  handleDownloadAPK = () => {
-    window.open('/static/files/MrakopediaReader.apk', '_blank');
-  };
+  constructor(props) {
+    super(props);
 
-  handleApplicationSourcesClick = () => {
-    window.open('https://github.com/pokatomnik/mrakopedia-reader', '_blank');
-  };
+    this.handleDownloadAPK = () => {
+      window.open('/static/files/MrakopediaReader.apk', '_blank');
+    };
 
-  handleServerSourcesClick = () => {
-    window.open('https://github.com/pokatomnik/mrakopedia-api', '_blank');
-  };
+    this.handleApplicationSourcesClick = () => {
+      window.open('https://github.com/pokatomnik/mrakopedia-reader', '_blank');
+    };
+
+    this.handleServerSourcesClick = () => {
+      window.open('https://github.com/pokatomnik/mrakopedia-api', '_blank');
+    };
+  }
 
   render() {
     return html`
