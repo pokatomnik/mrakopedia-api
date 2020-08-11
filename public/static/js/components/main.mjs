@@ -1,4 +1,4 @@
-import { html } from '../preact.mjs';
+import { html } from '../preact/preact.mjs';
 
 export const Main = ({ children }) => {
   return html`<main>${children}</main`;
