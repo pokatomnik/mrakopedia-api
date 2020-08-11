@@ -1,4 +1,4 @@
-import { html } from '../preact.mjs';
+import { html } from '../preact/preact.mjs';
 import { ActionButtons } from './action-buttons.mjs';
 
 export const Intro = () => {
