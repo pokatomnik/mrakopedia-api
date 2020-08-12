@@ -1,4 +1,4 @@
-import { html, Hooks } from '../preact/preact.mjs';
+import { html } from '../preact/preact.mjs';
 import { style } from '../utils/style.mjs';
 import { Test } from './test.mjs';
 
