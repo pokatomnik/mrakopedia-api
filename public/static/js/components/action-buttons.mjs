@@ -1,6 +1,5 @@
 import { html } from '../preact/preact.mjs';
 import { style } from '../utils/style.mjs';
-import { Test } from './test.mjs';
 
 const BUTTON_STYLE = style({ margin: '0 2px' });
 
@@ -34,7 +33,6 @@ export const ActionButtons = () => {
       >
         Server Sources
       </a>
-      <${Test} />
     </p>
   `;
 };

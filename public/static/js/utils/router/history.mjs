@@ -1,4 +1,4 @@
-import Preact, { Hooks } from '../preact/preact.mjs';
+import Preact, { Hooks } from '../../preact/preact.mjs';
 import { Router } from './router.mjs';
 import { UrlData } from './url-data.mjs';
 

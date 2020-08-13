@@ -1,13 +1,8 @@
 import { html } from './preact/preact.mjs';
-import { Main } from './components/main.mjs';
-import { Intro } from './components/intro.mjs';
-import { Columns } from './components/columns.mjs';
+import { RouterComponent } from './utils/router/route-component.mjs';
+import { Fallback } from './pages/fallback.mjs';
+import { routes } from './routes.mjs';
 
 export const App = () => {
-  return html`
-    <${Main}>
-      <${Intro} />
-      <${Columns} />
-    </${Main}>
-  `;
+  return html`<${RouterComponent} routes=${routes} fallback=${Fallback} />`;
 };
