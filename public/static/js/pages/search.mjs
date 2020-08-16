@@ -1,14 +1,23 @@
-import Preact, { html } from '../preact/preact.mjs';
+import Preact, { html, Hooks } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
 import { Header } from '../components/header.mjs';
-import { SearchResults } from '../components/search-results.mjs';
+import { PageResults } from '../components/page-results.mjs';
+import { apiSearch } from '../api/api-routes.mjs';
+import { useRouteData } from '../utils/router/route-component.mjs';
 
 export const Search = () => {
+  const {
+    params: { searchInput },
+  } = useRouteData();
+  const fetchPages = Hooks.useCallback(() => {
+    return fetch(apiSearch(searchInput)).then((res) => res.json());
+  }, [searchInput]);
+
   return html`
     <${Preact.Fragment}>
     <${Header} />
     <${Main}>
-      <${SearchResults} />
+      <${PageResults} fetchPages=${fetchPages} />
     </${Main}>
     </${Preact.Fragment}>
   `;

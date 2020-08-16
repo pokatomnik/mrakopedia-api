@@ -1,4 +1,5 @@
 import { html, Hooks } from '../preact/preact.mjs';
+import { Container } from './container.mjs';
 
 export const ListView = ({
   items,
@@ -10,7 +11,7 @@ export const ListView = ({
 }) => {
   const grouped = Hooks.useMemo(() => groupBy(items), [groupBy, items]);
   return html`
-    <div className="container">
+    <${Container}>
       ${Object.entries(grouped).map(([entryName, values]) => {
         return html`
           <div className="my-3 p-3 bg-white rounded box-shadow">
@@ -31,6 +32,6 @@ export const ListView = ({
           </div>
         `;
       })}
-    </div>
+    </${Container}>
   `;
 };

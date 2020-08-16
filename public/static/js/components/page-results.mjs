@@ -1,10 +1,9 @@
 import Preact, { Hooks, html } from '../preact/preact.mjs';
-import { search } from '../api/api-routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 import { ListView } from './list-view.mjs';
 import { RoutePage } from '../routes.mjs';
 
-const SearchResultItem = ({ title }) => {
+const PageResultItem = ({ title }) => {
   const { push } = useRouteData();
   const handleClick = Hooks.useCallback(() => {
     push(RoutePage.link(title));
@@ -16,17 +15,13 @@ const SearchResultItem = ({ title }) => {
   `;
 };
 
-export const SearchResults = () => {
-  const {
-    params: { searchInput },
-  } = useRouteData();
+export const PageResults = ({ fetchPages, groupBy }) => {
   const [searchResults, setSearchResults] = Hooks.useState([]);
   const [error, setError] = Hooks.useState('');
 
   Hooks.useEffect(() => {
     setError('');
-    fetch(search(searchInput))
-      .then((res) => res.json())
+    fetchPages()
       .then((res) => {
         setSearchResults(res);
       })
@@ -35,7 +30,7 @@ export const SearchResults = () => {
           'Поиск завершился ошибкой, попробуйте позднее или поменяйте строку поиска'
         );
       });
-  }, [searchInput]);
+  }, [fetchPages]);
 
   if (error) {
     return html`
@@ -52,8 +47,9 @@ export const SearchResults = () => {
     <${ListView}
       items=${searchResults}
       defaultName="Результаты поиска"
+      groupBy=${groupBy}
     >
-      ${({ title }) => html`<${SearchResultItem} title=${title} />`}
+      ${({ title }) => html`<${PageResultItem} title=${title} />`}
     </${ListView}>
   `;
 };
