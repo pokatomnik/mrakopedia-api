@@ -1,6 +1,8 @@
 import { Index } from './pages/index.mjs';
 import { Page } from './pages/page.mjs';
 import { Search } from './pages/search.mjs';
+import { Categories } from './pages/categories.mjs';
+import { PagesByCategory } from './pages/pages-by-category.mjs';
 
 export const RouteIndex = {
   url: '/',
@@ -26,4 +28,26 @@ export const RouteSearch = {
   },
 };
 
-export const routes = [RouteIndex, RoutePage, RouteSearch];
+export const RouteCategories = {
+  url: '/categories',
+  Component: Categories,
+  link() {
+    return this.url;
+  },
+};
+
+export const RoutePagesByCategory = {
+  url: '/categories/:categoryName',
+  Component: PagesByCategory,
+  link(categoryName) {
+    return `/categories/${categoryName}`;
+  },
+};
+
+export const routes = [
+  RouteIndex,
+  RoutePage,
+  RouteSearch,
+  RouteCategories,
+  RoutePagesByCategory,
+];

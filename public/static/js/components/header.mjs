@@ -1,5 +1,5 @@
 import { html, Hooks } from '../preact/preact.mjs';
-import { RouteIndex, RouteSearch } from '../routes.mjs';
+import { RouteIndex, RouteSearch, RouteCategories } from '../routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 
 const COLLAPSE_ID = 'navbarCollapse';
@@ -7,12 +7,29 @@ const COLLAPSE_ID = 'navbarCollapse';
 export const Header = () => {
   const { push } = useRouteData();
   const [searchString, setSearchString] = Hooks.useState('');
-  const handlePushIndex = Hooks.useCallback(() => {
-    push(RouteIndex.link());
-  }, [push]);
+
+  const handlePushIndex = Hooks.useCallback(
+    (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      push(RouteIndex.link());
+    },
+    [push]
+  );
+
+  const handleCategories = Hooks.useCallback(
+    (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      push(RouteCategories.link());
+    },
+    [push]
+  );
+
   const handleInput = Hooks.useCallback(({ currentTarget: { value } }) => {
     setSearchString(value);
   }, []);
+
   const handleSubmit = Hooks.useCallback(
     (evt) => {
       evt.preventDefault();
@@ -25,7 +42,7 @@ export const Header = () => {
   return html`
     <header>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-        <a className="navbar-brand" href="#" onClick=${handlePushIndex}>
+        <a className="navbar-brand" href="/#" onClick=${handlePushIndex}>
           MrakopediaReader
         </a>
         <button
@@ -42,7 +59,13 @@ export const Header = () => {
         <div className="navbar-collapse collapse" id="${COLLAPSE_ID}">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
+              <a
+                className="nav-link"
+                href=${`/#${RouteCategories.link()}`}
+                onClick=${handleCategories}
+              >
+                Категории
+              </a>
             </li>
           </ul>
           <form className="form-inline mt-2 mt-md-0" onSubmit=${handleSubmit}>
