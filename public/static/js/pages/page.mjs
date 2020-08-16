@@ -1,16 +1,14 @@
 import Preact, { html } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
-import { Intro } from '../components/intro.mjs';
-import { Columns } from '../components/columns.mjs';
 import { Header } from '../components/header.mjs';
+import { PageContents } from '../components/page-contents.mjs';
 
-export const Index = () => {
+export const Page = () => {
   return html`
     <${Preact.Fragment}>
     <${Header} />
     <${Main}>
-      <${Intro} />
-      <${Columns} />
+      <${PageContents} />
     </${Main}>
     </${Preact.Fragment}>
   `;
