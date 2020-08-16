@@ -20,33 +20,33 @@ const Row = ({ children }) => {
 export const Columns = () => {
   return html`
   <${Row}>
-    <${LargeColumn} title="Feature rich">
+    <${LargeColumn} title="Возможности">
       <ul>
-        <li>Page search</li>
-        <li>Categories navigation</li>
-        <li>Stories of month</li>
-        <li>Your personal favories list</li>
-        <li>Similar stories</li>
-        <li>Categories of the specific page</li>
+        <li>Поиск историй</li>
+        <li>Навигация по категориям</li>
+        <li>Истории месяца</li>
+        <li>Избранное</li>
+        <li>Истории, похожие на выбранную</li>
+        <li>Категории выбранной истории</li>
+        <li>Приложение активно развивается, новые возможности появляются каждую неделю</li>
       </ul>
     </${LargeColumn}>
-    <${LargeColumn} title="Open source">
-      This is an open source project,
-      so feel free to look at the source code and contribute.
+    <${LargeColumn} title="Открытый код">
+      Это открытый проект, каждый может принять в нем участие.
+      Пулреквесты приветствуются.
     </${LargeColumn}>
-    <${LargeColumn} title="Open to feature requests">
+    <${LargeColumn} title="Чего-то не хватает?">
       <p>
-        I will be glad to see any${' '}
+        Буду рад видеть любую обратную${' '}
         <a
           href="https://github.com/pokatomnik/mrakopedia-reader/issues"
           rel="noreferrer noopener"
         >
-          feedback
+          связь
         </a>.
       </p>
       <p>
-        Even if this project is my own initiative,
-        I will be happy any comments, feature requests or even blame:)
+        Любые комментарии, просьбы о реализации новых фич или критика
       </p>
     </${LargeColumn}>
   </${Row}>

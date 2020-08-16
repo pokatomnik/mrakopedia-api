@@ -38,5 +38,3 @@ export const matchParams = (route, pattern) => {
     params,
   };
 };
-
-window.matchParams = matchParams;

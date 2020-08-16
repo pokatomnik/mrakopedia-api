@@ -13,7 +13,7 @@ export const ActionButtons = () => {
         className="btn btn-primary my-2"
         style="${BUTTON_STYLE}"
       >
-        Download APK
+        Скачать APK
       </a>
       <a
         href="https://github.com/pokatomnik/mrakopedia-reader"
@@ -22,7 +22,7 @@ export const ActionButtons = () => {
         style="${BUTTON_STYLE}"
         className="btn btn-secondary my-2"
       >
-        Application Sources
+        Исходный код приложения
       </a>
       <a
         href="https://github.com/pokatomnik/mrakopedia-api"
@@ -31,7 +31,7 @@ export const ActionButtons = () => {
         style="${BUTTON_STYLE}"
         className="btn btn-secondary my-2"
       >
-        Server Sources
+        Исходный код сервера
       </a>
     </p>
   `;
