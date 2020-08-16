@@ -30,6 +30,15 @@
       import { App } from '/static/js/index.mjs';
       Preact.render(Preact.createElement(App), document.body);
     </script>
+    <script defer nomodule>
+      var body = document.body;
+      var h1 = document.createElement('h1');
+      var p = document.createElement('p');
+      h1.innerText = "Неподдерживаемый браузер";
+      p.innerText = "Используемый браузер не поддерживается. Сайт работает с последними версиями Chrome, Firefox, Safari и Edge.";
+      body.appendChild(h1);
+      body.appendChild(p);
+    </script>
   </head>
   <body></body>
 </html>
