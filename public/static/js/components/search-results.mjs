@@ -31,7 +31,9 @@ export const SearchResults = () => {
         setSearchResults(res);
       })
       .catch(() => {
-        setError('Search failed, please try again later');
+        setError(
+          'Поиск завершился ошибкой, попробуйте позднее или поменяйте строку поиска'
+        );
       });
   }, [searchInput]);
 
@@ -39,7 +41,7 @@ export const SearchResults = () => {
     return html`
       <${ListView}
         items=${[]}
-        defaultName="Search error"
+        defaultName="Ошибка поиска"
       >
         ${() => html`<${Preact.Fragment} />`}
       </${ListView}>
@@ -49,7 +51,7 @@ export const SearchResults = () => {
   return html`
     <${ListView}
       items=${searchResults}
-      defaultName="Search results"
+      defaultName="Результаты поиска"
     >
       ${({ title }) => html`<${SearchResultItem} title=${title} />`}
     </${ListView}>

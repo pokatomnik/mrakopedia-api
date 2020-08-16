@@ -49,13 +49,13 @@ export const Header = () => {
             <input
               className="form-control mr-sm-2"
               type="text"
-              placeholder="Story name..."
-              aria-label="Story name..."
+              placeholder="Навание истории..."
+              aria-label="Название истории..."
               value=${searchString}
               onChange=${handleInput}
             />
             <button className="btn btn-primary my-2 my-sm-0" type="submit">
-              Search
+              Поиск
             </button>
           </form>
         </div>
