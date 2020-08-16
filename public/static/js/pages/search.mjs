@@ -1,16 +1,14 @@
 import Preact, { html } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
-import { Intro } from '../components/intro.mjs';
-import { Columns } from '../components/columns.mjs';
 import { Header } from '../components/header.mjs';
+import { SearchResults } from '../components/search-results.mjs';
 
-export const Index = () => {
+export const Search = () => {
   return html`
     <${Preact.Fragment}>
     <${Header} />
     <${Main}>
-      <${Intro} />
-      <${Columns} />
+      <${SearchResults} />
     </${Main}>
     </${Preact.Fragment}>
   `;

@@ -2,7 +2,7 @@ import { html } from '../preact/preact.mjs';
 
 const LargeColumn = ({ title, children }) => {
   return html`
-    <div class="col-lg-4">
+    <div className="col-lg-4">
       <h2>${title}</h2>
       <p>${children}</p>
     </div>
@@ -10,8 +10,8 @@ const LargeColumn = ({ title, children }) => {
 };
 
 const Row = ({ children }) => {
-  return html`<div class="container">
-    <div class="row">
+  return html`<div className="container">
+    <div className="row">
       ${children}
     </div>
   </div>`;

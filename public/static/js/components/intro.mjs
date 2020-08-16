@@ -7,7 +7,7 @@ export const Intro = () => {
       <div className="container">
         <img
           src="/static/img/comfy.png"
-          class="img-fluid"
+          className="img-fluid"
           alt="Responsive image"
         />
         <h1 className="jumbotron-heading">
