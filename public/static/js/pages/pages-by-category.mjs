@@ -5,6 +5,7 @@ import { PageResults } from '../components/page-results.mjs';
 import { apiPagesByCategory } from '../api/api-routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 import { groupByFirstLetter } from '../utils/group-by-first-letter.mjs';
+import { Container } from '../components/container.mjs';
 
 export const PagesByCategory = () => {
   const {
@@ -18,6 +19,11 @@ export const PagesByCategory = () => {
     <${Preact.Fragment}>
     <${Header} />
     <${Main}>
+      <${Container}>
+        <h1 className="mt-5">
+          Категория: ${decodeURIComponent(categoryName)}
+        </h1>
+      </${Container}>
       <${PageResults} fetchPages=${fetchPages} groupBy=${groupByFirstLetter} />
     </${Main}>
     </${Preact.Fragment}>

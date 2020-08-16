@@ -1,4 +1,5 @@
 import { html } from '../preact/preact.mjs';
+import { Container } from './container.mjs';
 
 const LargeColumn = ({ title, children }) => {
   return html`
@@ -10,11 +11,11 @@ const LargeColumn = ({ title, children }) => {
 };
 
 const Row = ({ children }) => {
-  return html`<div className="container">
+  return html`<${Container}>
     <div className="row">
       ${children}
     </div>
-  </div>`;
+  </${Container}>`;
 };
 
 export const Columns = () => {
