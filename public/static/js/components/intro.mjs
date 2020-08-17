@@ -15,7 +15,7 @@ export const Intro = () => {
           Mrakopedia Reader
         </h1>
         <p className="lead text-muted">
-          Android-приложение для чтения истори из${' '}
+          Android-приложение для чтения историй из${' '}
           <a
             href="https://mrakopedia.net"
             rel="noreferrer noopener"
