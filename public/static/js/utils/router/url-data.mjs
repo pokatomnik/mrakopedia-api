@@ -37,7 +37,7 @@ export class UrlData {
 }
 
 UrlData.fromString = function (path) {
-  const url = new URL(path, window.location);
+  const url = new URL(path, window.location.toString());
   const pathName = url.pathname;
   const optionsString = url.search ? url.search : '?';
   const options = optionsString
