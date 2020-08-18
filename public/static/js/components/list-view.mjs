@@ -4,7 +4,7 @@ import { Container } from './container.mjs';
 export const ListView = ({
   items,
   defaultName,
-  groupBy = () => ({
+  groupBy = (items) => ({
     [defaultName]: items,
   }),
   children,
