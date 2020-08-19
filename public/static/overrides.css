@@ -20,6 +20,11 @@ div.embedvideo {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100% !important;
+  text-align: center;
+  padding: 40px;
+  box-sizing: border-box;
+  max-height: 100px;
 }
 
 div.embedvideo > iframe {
