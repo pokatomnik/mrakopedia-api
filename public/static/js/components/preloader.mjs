@@ -11,13 +11,7 @@ const IMAGE_CONTAINER_STYLE = style({
 });
 
 export const Preloader = () => {
-  return html`
-    <img
-      className="rounded-circle"
-      src=${PRELOADER_SRC}
-      alt=${PRELOADER_ALT_TEXT}
-    />
-  `;
+  return html` <img src=${PRELOADER_SRC} alt=${PRELOADER_ALT_TEXT} /> `;
 };
 
 export const PreloaderContainer = () => {
