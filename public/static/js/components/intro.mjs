@@ -1,10 +1,11 @@
 import { html } from '../preact/preact.mjs';
 import { ActionButtons } from './action-buttons.mjs';
 import { Container } from './container.mjs';
+import { Jumbotron } from './jumbotron.mjs';
 
 export const Intro = () => {
   return html`
-    <section className="jumbotron text-center">
+    <${Jumbotron}>
       <${Container}>
         <img
           src="/static/img/comfy.png"
@@ -25,6 +26,6 @@ export const Intro = () => {
         </p>
         <${ActionButtons} />
       </${Container}>
-    </section>
+    </${Jumbotron}>
   `;
 };
