@@ -56,7 +56,7 @@ export const Header = ({ children }) => {
 
   return html`
     <header>
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+      <nav className="navbar navbar-dark bg-dark">
         <a className="navbar-brand" href="/#" onClick=${handlePushIndex}>
           MrakopediaReader
         </a>
