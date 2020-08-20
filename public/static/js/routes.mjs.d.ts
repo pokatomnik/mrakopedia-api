@@ -11,10 +11,12 @@ export const RoutePage: IRouteObject<string>;
 export const RouteSearch: IRouteObject<string>;
 export const RouteCategories: IRouteObject<void>;
 export const RoutePagesByCategory: IRouteObject<string>;
+export const RouteStoriesOfMonth: IRouteObject<void>;
 export const routes = [
   RouteIndex,
   RoutePage,
   RouteSearch,
   RouteCategories,
   RoutePagesByCategory,
+  RouteStoriesOfMonth,
 ] as const;
