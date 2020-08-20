@@ -2,14 +2,18 @@ import Preact, { html, Hooks } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
 import { Header } from '../components/header.mjs';
 import { PageResults } from '../components/page-results.mjs';
-import { apiStoriesOfMonth } from '../api/api-routes.mjs';
-import { groupByFirstLetter } from '../utils/group-by-first-letter.mjs';
+import { apiRelated } from '../api/api-routes.mjs';
+import { useRouteData } from '../utils/router/route-component.mjs';
 import { Container } from '../components/container.mjs';
 
-export const StoriesOfMonth = () => {
+export const Like = () => {
+  const {
+    params: { pageName },
+  } = useRouteData();
+
   const fetchPages = Hooks.useCallback(() => {
-    return fetch(apiStoriesOfMonth()).then((res) => res.json());
-  }, []);
+    return fetch(apiRelated(pageName)).then((res) => res.json());
+  }, [pageName]);
 
   return html`
     <${Preact.Fragment}>
@@ -17,10 +21,10 @@ export const StoriesOfMonth = () => {
     <${Main}>
       <${Container}>
         <h1 className="mt-5">
-          Истории месяца
+          Похожие на "${decodeURIComponent(pageName)}"
         </h1>
       </${Container}>
-      <${PageResults} fetchPages=${fetchPages} groupBy=${groupByFirstLetter} />
+      <${PageResults} fetchPages=${fetchPages} />
     </${Main}>
     </${Preact.Fragment}>
   `;
