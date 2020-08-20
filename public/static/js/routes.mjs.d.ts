@@ -13,6 +13,7 @@ export const RouteCategories: IRouteObject<void>;
 export const RoutePagesByCategory: IRouteObject<string>;
 export const RouteStoriesOfMonth: IRouteObject<void>;
 export const RouteLike: IRouteObject<string>;
+export const RouteCategoriesByPage: IRouteObject<string>;
 export const routes = [
   RouteIndex,
   RoutePage,
@@ -21,4 +22,5 @@ export const routes = [
   RoutePagesByCategory,
   RouteStoriesOfMonth,
   RouteLike,
+  RouteCategoriesByPage,
 ] as const;

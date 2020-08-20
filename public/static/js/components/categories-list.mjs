@@ -1,8 +1,6 @@
 import Preact, { Hooks, html } from '../preact/preact.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 import { ListView } from './list-view.mjs';
-import { apiCategories } from '../api/api-routes.mjs';
-import { groupByFirstLetter } from '../utils/group-by-first-letter.mjs';
 import { RoutePagesByCategory } from '../routes.mjs';
 import { PreloaderContainer } from './preloader.mjs';
 
@@ -27,7 +25,7 @@ const CategoryItem = ({ categoryTitle }) => {
   `;
 };
 
-export const CategoriesList = () => {
+export const CategoriesList = ({ fetchCategories, groupBy }) => {
   const mounted = Hooks.useRef(false);
   const [categories, setCategories] = Hooks.useState([]);
   const [error, setError] = Hooks.useState('');
@@ -39,7 +37,8 @@ export const CategoriesList = () => {
     setError('');
     setIsLoading(true);
     setNoResults(false);
-    fetch(apiCategories())
+
+    fetchCategories()
       .then((res) => res.json())
       .then((res) => {
         if (!mounted.current) {
@@ -105,7 +104,7 @@ export const CategoriesList = () => {
     <${ListView}
       items=${categories}
       defaultName=${NO_CATEGORY}
-      groupBy=${groupByFirstLetter}
+      groupBy=${groupBy}
     >
       ${({ title }) => html`<${CategoryItem} categoryTitle=${title} />`}
     </${ListView}>

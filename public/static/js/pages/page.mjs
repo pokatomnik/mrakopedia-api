@@ -2,7 +2,7 @@ import Preact, { html } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
 import { Header, NavLink } from '../components/header.mjs';
 import { PageContents } from '../components/page-contents.mjs';
-import { RouteLike } from '../routes.mjs';
+import { RouteLike, RouteCategoriesByPage } from '../routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 
 export const Page = () => {
@@ -15,6 +15,9 @@ export const Page = () => {
     <${Header}>
       <${NavLink} link=${RouteLike.link(pageName)}>
         Похожие истории
+      </${NavLink}>
+      <${NavLink} link=${RouteCategoriesByPage.link(pageName)}>
+        Категории истории
       </${NavLink}>
     </${Header}>
     <${Main}>

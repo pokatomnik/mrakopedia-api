@@ -3,25 +3,28 @@ import { Main } from '../components/main.mjs';
 import { Header } from '../components/header.mjs';
 import { CategoriesList } from '../components/categories-list.mjs';
 import { Container } from '../components/container.mjs';
-import { apiCategories } from '../api/api-routes.mjs';
-import { groupByFirstLetter } from '../utils/group-by-first-letter.mjs';
+import { apiCategoriesByPage } from '../api/api-routes.mjs';
+import { useRouteData } from '../utils/router/route-component.mjs';
 
-export const Categories = () => {
+export const CategoriesByPage = () => {
+  const {
+    params: { pageName },
+  } = useRouteData();
+
   const fetchCategories = Hooks.useCallback(() => {
-    return fetch(apiCategories());
-  }, []);
+    return fetch(apiCategoriesByPage(pageName));
+  }, [pageName]);
 
   return html`
     <${Preact.Fragment}>
     <${Header} />
     <${Main}>
       <${Container}>
-        <h1 className="mt-5">Категории</h1>
+        <h1 className="mt-5">
+          Категории истории "${decodeURIComponent(pageName)}"
+        </h1>
       </${Container}>
-      <${CategoriesList}
-        fetchCategories=${fetchCategories}
-        groupBy=${groupByFirstLetter}
-      />
+      <${CategoriesList} fetchCategories=${fetchCategories} />
     </${Main}>
     </${Preact.Fragment}>
   `;
