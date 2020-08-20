@@ -4,3 +4,4 @@ export function apiCategories(): string;
 export function apiPagesByCategory(categoryName: string): string;
 export function apiStoriesOfMonth(): string;
 export function apiRelated(pageName: string): string;
+export function apiCategoriesByPage(pageName: string): string;
