@@ -7,3 +7,4 @@ export const apiStoriesOfMonth = () => `/api/hotm`;
 export const apiRelated = (pageName) => `/api/page/${pageName}/related`;
 export const apiCategoriesByPage = (pageName) =>
   `/api/page/${pageName}/categories`;
+export const apiSourceUrl = (pageName) => `/api/page/${pageName}/source`;
