@@ -4,6 +4,7 @@ import { Search } from './pages/search.mjs';
 import { Categories } from './pages/categories.mjs';
 import { PagesByCategory } from './pages/pages-by-category.mjs';
 import { StoriesOfMonth } from './pages/stories-of-month.mjs';
+import { Like } from './pages/like.mjs';
 
 export const RouteIndex = {
   url: '/',
@@ -53,6 +54,14 @@ export const RouteStoriesOfMonth = {
   },
 };
 
+export const RouteLike = {
+  url: '/page/:pageName/like',
+  Component: Like,
+  link(pageName) {
+    return `/page/${pageName}/like`;
+  },
+};
+
 export const routes = [
   RouteIndex,
   RoutePage,
@@ -60,4 +69,5 @@ export const routes = [
   RouteCategories,
   RoutePagesByCategory,
   RouteStoriesOfMonth,
+  RouteLike,
 ];
