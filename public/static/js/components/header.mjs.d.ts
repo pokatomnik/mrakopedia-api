@@ -1,3 +1,7 @@
 import { Element } from '../preact/preact.mjs';
 
-export function Header(): Element;
+interface IHeaderProps {
+  children?: Element;
+}
+
+export function Header(props: IHeaderProps): Element;

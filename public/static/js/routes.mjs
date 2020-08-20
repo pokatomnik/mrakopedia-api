@@ -3,6 +3,7 @@ import { Page } from './pages/page.mjs';
 import { Search } from './pages/search.mjs';
 import { Categories } from './pages/categories.mjs';
 import { PagesByCategory } from './pages/pages-by-category.mjs';
+import { StoriesOfMonth } from './pages/stories-of-month.mjs';
 
 export const RouteIndex = {
   url: '/',
@@ -44,10 +45,19 @@ export const RoutePagesByCategory = {
   },
 };
 
+export const RouteStoriesOfMonth = {
+  url: '/stories-of-month',
+  Component: StoriesOfMonth,
+  link() {
+    return this.url;
+  },
+};
+
 export const routes = [
   RouteIndex,
   RoutePage,
   RouteSearch,
   RouteCategories,
   RoutePagesByCategory,
+  RouteStoriesOfMonth,
 ];

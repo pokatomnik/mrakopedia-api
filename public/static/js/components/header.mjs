@@ -1,10 +1,15 @@
 import { html, Hooks } from '../preact/preact.mjs';
-import { RouteIndex, RouteSearch, RouteCategories } from '../routes.mjs';
+import {
+  RouteIndex,
+  RouteSearch,
+  RouteCategories,
+  RouteStoriesOfMonth,
+} from '../routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 
 const COLLAPSE_ID = 'navbarCollapse';
 
-export const Header = () => {
+export const Header = ({ children }) => {
   const { push } = useRouteData();
   const [searchString, setSearchString] = Hooks.useState('');
 
@@ -17,11 +22,20 @@ export const Header = () => {
     [push]
   );
 
-  const handleCategories = Hooks.useCallback(
+  const handleCategoriesClick = Hooks.useCallback(
     (evt) => {
       evt.preventDefault();
       evt.stopPropagation();
       push(RouteCategories.link());
+    },
+    [push]
+  );
+
+  const handleStoriesOfMonthClick = Hooks.useCallback(
+    (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      push(RouteStoriesOfMonth.link());
     },
     [push]
   );
@@ -62,11 +76,21 @@ export const Header = () => {
               <a
                 className="nav-link"
                 href=${`/#${RouteCategories.link()}`}
-                onClick=${handleCategories}
+                onClick=${handleCategoriesClick}
               >
                 Категории
               </a>
             </li>
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                href=${`/#${RouteStoriesOfMonth.link()}`}
+                onClick=${handleStoriesOfMonthClick}
+              >
+                Истории месяца
+              </a>
+            </li>
+            ${children}
           </ul>
           <form className="form-inline mt-2 mt-md-0" onSubmit=${handleSubmit}>
             <input
