@@ -1,7 +1,7 @@
 import { html, Hooks } from '../preact/preact.mjs';
 import { useAuth } from '../utils/auth/auth.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
-import { RouteIndex, RouteCategoriesByPage } from '../routes.mjs';
+import { RouteIndex } from '../routes.mjs';
 import { style } from '../utils/style.mjs';
 
 const FORM_STYLE = style({
@@ -75,7 +75,7 @@ export const LoginForm = () => {
             className="form-control"
             id="email-input"
             aria-describedby="emailHelp"
-            placeholder="Enter email"
+            placeholder="Введите Email"
             onChange=${handleEmailInput}
           />
         </div>
@@ -85,7 +85,7 @@ export const LoginForm = () => {
             type="password"
             className="form-control"
             id="password-input"
-            placeholder="Password"
+            placeholder="Введите пароль"
             onChange=${handlePasswordInput}
           />
         </div>
