@@ -4,8 +4,10 @@ import {
   RouteSearch,
   RouteCategories,
   RouteStoriesOfMonth,
+  RouteLogin,
 } from '../routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
+import { useAuth } from '../utils/auth/auth.mjs';
 
 const COLLAPSE_ID = 'navbarCollapse';
 
@@ -30,7 +32,33 @@ export const NavLink = ({ link, children }) => {
 
 export const Header = ({ children }) => {
   const { push } = useRouteData();
+  const { user, logout } = useAuth();
   const [searchString, setSearchString] = Hooks.useState('');
+
+  const handleLogout = Hooks.useCallback(
+    (evt) => {
+      evt.preventDefault();
+      if (!user) {
+        return;
+      }
+
+      logout().then(() => {
+        push(RouteIndex.link());
+      });
+    },
+    [logout, user]
+  );
+
+  const handleLogin = Hooks.useCallback(
+    (evt) => {
+      evt.preventDefault();
+      if (user) {
+        return;
+      }
+      push(RouteLogin.link());
+    },
+    [user]
+  );
 
   const handlePushIndex = Hooks.useCallback(
     (evt) => {
@@ -54,11 +82,23 @@ export const Header = ({ children }) => {
     [searchString, push]
   );
 
+  const navMenuItemClass = 'dropdown-item';
+  const loginMenuItemClasses = user
+    ? `${navMenuItemClass} disabled`
+    : navMenuItemClass;
+  const logoutMenuItemClasses = user
+    ? navMenuItemClass
+    : `${navMenuItemClass} disabled`;
+
   return html`
     <header>
       <nav className="navbar navbar-dark bg-dark">
-        <a className="navbar-brand" href="/#" onClick=${handlePushIndex}>
-          MrakopediaReader
+        <a
+          className="navbar-brand"
+          href=${`/#${RouteIndex.link()}`}
+          onClick=${handlePushIndex}
+        >
+          ${user ? user.userName : 'MrakopediaReader'}
         </a>
         <button
           className="navbar-toggler collapsed"
@@ -73,6 +113,33 @@ export const Header = ({ children }) => {
         </button>
         <div className="navbar-collapse collapse" id="${COLLAPSE_ID}">
           <ul className="navbar-nav mr-auto">
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                id="user-dropdown"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Пользователь
+              </a>
+              <div className="dropdown-menu" aria-labelledby="user-dropdown">
+                <a
+                  className=${loginMenuItemClasses}
+                  href=${`/#${RouteLogin.link()}`}
+                  onClick=${handleLogin}
+                >
+                  Войти
+                </a>
+                <a
+                  className=${logoutMenuItemClasses}
+                  href="#"
+                  onClick=${handleLogout}
+                >
+                  Выйти
+                </a>
+              </div>
+            </li>
             <${NavLink} link=${RouteCategories.link()}>
               Категории
             </${NavLink}>
