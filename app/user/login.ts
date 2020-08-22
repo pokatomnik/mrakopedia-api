@@ -56,6 +56,7 @@ export const login = async (request: NowRequest, response: NowResponse) => {
     const paramsToSign = {
       email: userObject.email,
       id: userObject._id.toString(),
+      userName: userObject.userName,
     };
     token = await sign(paramsToSign);
     const loginResult: ILoginSuccess = { token };

@@ -4,12 +4,13 @@ import { getSecret } from './secret';
 interface ISignParams {
   email: string;
   id: string;
+  userName: string;
 }
 
-export const sign = ({ email, id }: ISignParams) =>
+export const sign = ({ email, id, userName }: ISignParams) =>
   new Promise<string>((resolve, reject) => {
     JWT.sign(
-      { email, id },
+      { email, id, userName },
       getSecret(),
       (err: Error | null, encoded: string | undefined) => {
         if (err || !encoded) {

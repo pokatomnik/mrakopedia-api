@@ -8,3 +8,4 @@ export const apiRelated = (pageName) => `/api/page/${pageName}/related`;
 export const apiCategoriesByPage = (pageName) =>
   `/api/page/${pageName}/categories`;
 export const apiSourceUrl = (pageName) => `/api/page/${pageName}/source`;
+export const apiLogin = () => `api/user?action=login`;

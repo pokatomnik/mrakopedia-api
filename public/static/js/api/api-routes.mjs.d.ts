@@ -6,3 +6,4 @@ export function apiStoriesOfMonth(): string;
 export function apiRelated(pageName: string): string;
 export function apiCategoriesByPage(pageName: string): string;
 export function apiSourceUrl(pageName: string): string;
+export function apiLogin(): string;
