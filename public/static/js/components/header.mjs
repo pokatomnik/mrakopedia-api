@@ -116,6 +116,7 @@ export const Header = ({ children }) => {
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
+                href=${`/#${RouteIndex.link()}`}
                 id="user-dropdown"
                 data-toggle="dropdown"
                 aria-haspopup="true"
