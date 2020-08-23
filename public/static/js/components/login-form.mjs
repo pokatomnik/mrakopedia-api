@@ -11,6 +11,10 @@ const FORM_STYLE = style({
   margin: '50px auto 0 auto',
 });
 
+const EMAIL_INPUT_STYLE = style({
+  'text-transform': 'lowercase',
+});
+
 export const LoginForm = () => {
   const mountedRef = Hooks.useRef(false);
   const [isSigningIn, setIsSigningIn] = Hooks.useState(false);
@@ -44,7 +48,7 @@ export const LoginForm = () => {
       evt.stopPropagation();
 
       setIsSigningIn(true);
-      login(email, password)
+      login(email.toLocaleLowerCase(), password)
         .then(() => {
           if (!mountedRef.current) {
             return;
@@ -71,11 +75,14 @@ export const LoginForm = () => {
             Email
           </label>
           <input
+            style=${EMAIL_INPUT_STYLE}
             type="email"
+            autocomplete="username"
             className="form-control"
             id="email-input"
             aria-describedby="emailHelp"
             placeholder="Введите Email"
+            value=${email}
             onInput=${handleEmailInput}
           />
         </div>
@@ -83,9 +90,11 @@ export const LoginForm = () => {
           <label for="password-input">Пароль</label>
           <input
             type="password"
+            autocomplete="current-password"
             className="form-control"
             id="password-input"
             placeholder="Введите пароль"
+            value=${password}
             onInput=${handlePasswordInput}
           />
         </div>
