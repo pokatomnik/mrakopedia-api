@@ -47,6 +47,7 @@ export const login = async (request: NowRequest, response: NowResponse) => {
       return response.status(403).json(WRONG_CREDENTIALS_ERROR);
     }
   } catch (e) {
+    console.error(e);
     return response.status(403).json(DB_ERROR);
   }
 

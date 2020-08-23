@@ -3,17 +3,18 @@ import { Main } from '../components/main.mjs';
 import { Header } from '../components/header.mjs';
 import { CategoriesList } from '../components/categories-list.mjs';
 import { Container } from '../components/container.mjs';
-import { apiCategoriesByPage } from '../api/api-routes.mjs';
+import { useApi } from '../api/api.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 
 export const CategoriesByPage = () => {
   const {
     params: { pageName },
   } = useRouteData();
+  const { getCategoriesByPage } = useApi();
 
   const fetchCategories = Hooks.useCallback(() => {
-    return fetch(apiCategoriesByPage(pageName));
-  }, [pageName]);
+    return getCategoriesByPage(pageName);
+  }, [pageName, getCategoriesByPage]);
 
   return html`
     <${Preact.Fragment}>
