@@ -2,8 +2,9 @@ import Preact, { Hooks, html } from '../../preact/preact.mjs';
 import { Storage } from './local-storage.mjs';
 import { MD5 } from './MD5.mjs';
 import { apiLogin } from '../../api/api-routes.mjs';
+import { ApiCall } from '../../api/fetch.mjs';
 
-const TOKEN_KEY = 'x-token';
+export const TOKEN_KEY = 'x-token';
 
 const noAuthProviderError = new Error('No AuthProvider');
 
@@ -45,23 +46,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = Hooks.useCallback((email, password) => {
     const passwordHash = MD5(password);
-    const params = new URLSearchParams();
-    params.append('email', email);
-    params.append('passwordHash', passwordHash);
-    return fetch(apiLogin(), {
-      method: 'POST',
-      cache: 'no-cache',
-      credentials: 'omit',
-      redirect: 'follow',
-      body: params,
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          throw new Error('Invalid credentials');
-        } else {
-          return res.json();
-        }
-      })
+    return ApiCall()
+      .post(apiLogin(), { email, passwordHash })
       .then(({ token }) => {
         storageRef.current.set(token);
         const userFromToken = getUserFromToken(token);

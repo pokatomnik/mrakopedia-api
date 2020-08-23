@@ -39,7 +39,6 @@ export const CategoriesList = ({ fetchCategories, groupBy }) => {
     setNoResults(false);
 
     fetchCategories()
-      .then((res) => res.json())
       .then((res) => {
         if (!mounted.current) {
           return;

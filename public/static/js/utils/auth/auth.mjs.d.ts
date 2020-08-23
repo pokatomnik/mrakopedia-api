@@ -20,3 +20,5 @@ interface IAuthContextValue {
 export function AuthProvider(props: IAuthProviderProps): Element;
 
 export function useAuth(): IAuthContextValue;
+
+export const TOKEN_KEY: string;

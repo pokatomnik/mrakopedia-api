@@ -4,9 +4,10 @@ import { Header, NavLink } from '../components/header.mjs';
 import { PageContents } from '../components/page-contents.mjs';
 import { RouteLike, RouteCategoriesByPage } from '../routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
-import { apiSourceUrl } from '../api/api-routes.mjs';
+import { useApi } from '../api/api.mjs';
 
 export const Page = () => {
+  const { getSourceUrl } = useApi();
   const mountedRef = Hooks.useRef(false);
   const [mrakopediaUrl, setMrakopediaUrl] = Hooks.useState(null);
 
@@ -17,20 +18,18 @@ export const Page = () => {
   Hooks.useEffect(() => {
     mountedRef.current = true;
 
-    fetch(apiSourceUrl(pageName))
-      .then((res) => res.json())
-      .then(({ url }) => {
-        if (!mountedRef.current) {
-          return;
-        }
+    getSourceUrl(pageName).then(({ url }) => {
+      if (!mountedRef.current) {
+        return;
+      }
 
-        setMrakopediaUrl(url);
-      });
+      setMrakopediaUrl(url);
+    });
 
     return () => {
       mountedRef.current = false;
     };
-  }, [pageName]);
+  }, [pageName, getSourceUrl]);
 
   const navLinkClass = 'nav-link';
   const mrakopediaUrlLinkClasses = mrakopediaUrl
