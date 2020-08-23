@@ -156,9 +156,13 @@ export const Header = ({ children }) => {
               placeholder="Навание истории..."
               aria-label="Название истории..."
               value=${searchString}
-              onChange=${handleInput}
+              onInput=${handleInput}
             />
-            <button className="btn btn-primary my-2 my-sm-0" type="submit">
+            <button
+              className="btn btn-primary my-2 my-sm-0"
+              type="submit"
+              disabled=${!searchString}
+            >
               Поиск
             </button>
           </form>
