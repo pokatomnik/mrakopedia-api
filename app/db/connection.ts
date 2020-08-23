@@ -8,7 +8,7 @@ export const connect = () => {
     throw new Error('No connection string');
   }
 
-  return Mongoose.connect(connectionString, {
+  return Mongoose.createConnection(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

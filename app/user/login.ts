@@ -37,8 +37,8 @@ export const login = async (request: NowRequest, response: NowResponse) => {
   let user: Document | null = null;
 
   try {
-    await connect();
-    user = await UserModel.findOne({
+    const connection = connect();
+    user = await UserModel(connection).findOne({
       email,
       passwordHash,
     });
