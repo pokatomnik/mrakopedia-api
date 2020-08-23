@@ -76,7 +76,7 @@ export const LoginForm = () => {
             id="email-input"
             aria-describedby="emailHelp"
             placeholder="Введите Email"
-            onChange=${handleEmailInput}
+            onInput=${handleEmailInput}
           />
         </div>
         <div className="form-group">
@@ -86,7 +86,7 @@ export const LoginForm = () => {
             className="form-control"
             id="password-input"
             placeholder="Введите пароль"
-            onChange=${handlePasswordInput}
+            onInput=${handlePasswordInput}
           />
         </div>
         <button type="submit" className="btn btn-primary float-right">
