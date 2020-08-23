@@ -1,5 +1,11 @@
 import Mongoose, { Schema } from 'mongoose';
 
+interface IUserDocument extends Mongoose.Document {
+  userName: string;
+  passwordHash: string;
+  email: string;
+}
+
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -18,4 +24,5 @@ const UserSchema = new Schema({
   },
 });
 
-export const UserModel = Mongoose.model('user', UserSchema);
+export const UserModel = (connection: Mongoose.Connection) =>
+  connection.model<IUserDocument>('user', UserSchema);
