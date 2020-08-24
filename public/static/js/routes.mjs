@@ -20,7 +20,7 @@ export const RoutePage = {
   url: '/page/:pageName',
   Component: Page,
   link(pageName) {
-    return `/page/${pageName}`;
+    return `/page/${encodeURIComponent(pageName)}`;
   },
 };
 
@@ -28,7 +28,7 @@ export const RouteSearch = {
   url: '/search/:searchInput',
   Component: Search,
   link(searchInput) {
-    return `/search/${searchInput}`;
+    return `/search/${encodeURIComponent(searchInput)}`;
   },
 };
 
@@ -44,7 +44,7 @@ export const RoutePagesByCategory = {
   url: '/categories/:categoryName',
   Component: PagesByCategory,
   link(categoryName) {
-    return `/categories/${categoryName}`;
+    return `/categories/${encodeURIComponent(categoryName)}`;
   },
 };
 
@@ -60,7 +60,7 @@ export const RouteLike = {
   url: '/page/:pageName/like',
   Component: Like,
   link(pageName) {
-    return `/page/${pageName}/like`;
+    return `/page/${encodeURIComponent(pageName)}/like`;
   },
 };
 
@@ -68,7 +68,7 @@ export const RouteCategoriesByPage = {
   url: '/page/:pageName/categories',
   Component: CategoriesByPage,
   link(pageName) {
-    return `/page/${pageName}/categories`;
+    return `/page/${encodeURIComponent(pageName)}/categories`;
   },
 };
 
