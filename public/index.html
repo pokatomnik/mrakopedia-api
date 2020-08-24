@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <title>MrakopediaReader</title>
+    <style>
+      .preloader {
+        background-image: url(/static/img/preloader.gif);
+        width: 100vw;
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+    </style>
     <link
       rel="stylesheet"
       href="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -29,6 +38,7 @@
     <script defer type="module">
       import Preact from '/static/js/preact/preact.mjs';
       import { App } from '/static/js/index.mjs';
+      document.body.innerHTML = '';
       Preact.render(Preact.createElement(App), document.body);
     </script>
     <script defer nomodule>
@@ -42,5 +52,7 @@
       body.appendChild(p);
     </script>
   </head>
-  <body></body>
+  <body>
+    <div class="preloader"></div>
+  </body>
 </html>
