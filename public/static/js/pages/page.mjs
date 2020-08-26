@@ -12,13 +12,13 @@ export const Page = () => {
   const [mrakopediaUrl, setMrakopediaUrl] = Hooks.useState(null);
 
   const {
-    params: { pageName },
+    params: { title },
   } = useRouteData();
 
   Hooks.useEffect(() => {
     mountedRef.current = true;
 
-    getSourceUrl(pageName).then(({ url }) => {
+    getSourceUrl(title).then(({ url }) => {
       if (!mountedRef.current) {
         return;
       }
@@ -29,7 +29,7 @@ export const Page = () => {
     return () => {
       mountedRef.current = false;
     };
-  }, [pageName, getSourceUrl]);
+  }, [title, getSourceUrl]);
 
   const navLinkClass = 'nav-link';
   const mrakopediaUrlLinkClasses = mrakopediaUrl
@@ -39,10 +39,10 @@ export const Page = () => {
   return html`
     <${Preact.Fragment}>
     <${Header}>
-      <${NavLink} link=${RouteLike.link(pageName)}>
+      <${NavLink} link=${RouteLike.link(decodeURIComponent(title))}>
         Похожие истории
       </${NavLink}>
-      <${NavLink} link=${RouteCategoriesByPage.link(pageName)}>
+      <${NavLink} link=${RouteCategoriesByPage.link(decodeURIComponent(title))}>
         Категории истории
       </${NavLink}>
       <li className="nav-item">

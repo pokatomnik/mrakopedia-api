@@ -10,8 +10,8 @@ const CONTENT_TYPE_KEY = 'content-type';
 const CONTENT_LENGTH_KEY = 'content-length';
 
 export default allowCors(async (request: NowRequest, response: NowResponse) => {
-  const name = stringify(request.query.name);
-  if (!name) {
+  const title = stringify(request.query.title);
+  if (!title) {
     response.setHeader(CONTENT_TYPE_KEY, CONTENT_TYPE_SVG);
     response.send(SVG_CONTENTS);
     return;
@@ -20,7 +20,7 @@ export default allowCors(async (request: NowRequest, response: NowResponse) => {
   let imageUrl: string | undefined = undefined;
 
   try {
-    imageUrl = await wiki.page(name).then((page) => page.mainImage());
+    imageUrl = await wiki.page(title).then((page) => page.mainImage());
   } catch {
     response.setHeader(CONTENT_TYPE_KEY, CONTENT_TYPE_SVG);
     response.send(SVG_CONTENTS);

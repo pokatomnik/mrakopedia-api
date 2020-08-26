@@ -1,4 +1,5 @@
 import Mongoose, { Schema } from 'mongoose';
+import { connect } from '../connection';
 
 interface IUserDocument extends Mongoose.Document {
   userName: string;
@@ -24,5 +25,5 @@ const UserSchema = new Schema({
   },
 });
 
-export const UserModel = (connection: Mongoose.Connection) =>
-  connection.model<IUserDocument>('user', UserSchema);
+export const UserModel = () =>
+  connect().model<IUserDocument>('user', UserSchema);

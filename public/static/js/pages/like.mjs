@@ -9,12 +9,12 @@ import { Container } from '../components/container.mjs';
 export const Like = () => {
   const { getRelated } = useApi();
   const {
-    params: { pageName },
+    params: { title },
   } = useRouteData();
 
   const fetchPages = Hooks.useCallback(() => {
-    return getRelated(pageName);
-  }, [pageName, getRelated]);
+    return getRelated(title);
+  }, [title, getRelated]);
 
   return html`
     <${Preact.Fragment}>
@@ -22,7 +22,7 @@ export const Like = () => {
     <${Main}>
       <${Container}>
         <h1 className="mt-5">
-          Похожие на "${decodeURIComponent(pageName)}"
+          Похожие на "${decodeURIComponent(title)}"
         </h1>
       </${Container}>
       <${PageResults} fetchPages=${fetchPages} />

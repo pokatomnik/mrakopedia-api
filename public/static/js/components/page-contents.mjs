@@ -12,8 +12,8 @@ const IFRAME_STYLE = style({
 
 export const PageContents = () => {
   const {
-    params: { pageName },
+    params: { title },
   } = useRouteData();
 
-  return html`<iframe style=${IFRAME_STYLE} src="${apiPage(pageName)}" />`;
+  return html`<iframe style=${IFRAME_STYLE} src="${apiPage(title)}" />`;
 };

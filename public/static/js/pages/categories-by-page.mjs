@@ -8,13 +8,13 @@ import { useRouteData } from '../utils/router/route-component.mjs';
 
 export const CategoriesByPage = () => {
   const {
-    params: { pageName },
+    params: { title },
   } = useRouteData();
   const { getCategoriesByPage } = useApi();
 
   const fetchCategories = Hooks.useCallback(() => {
-    return getCategoriesByPage(pageName);
-  }, [pageName, getCategoriesByPage]);
+    return getCategoriesByPage(title);
+  }, [title, getCategoriesByPage]);
 
   return html`
     <${Preact.Fragment}>
@@ -22,7 +22,7 @@ export const CategoriesByPage = () => {
     <${Main}>
       <${Container}>
         <h1 className="mt-5">
-          Категории истории "${decodeURIComponent(pageName)}"
+          Категории истории "${decodeURIComponent(title)}"
         </h1>
       </${Container}>
       <${CategoriesList} fetchCategories=${fetchCategories} />

@@ -1,12 +1,10 @@
 import { NowRequest, NowResponse } from '@vercel/node';
-import { TOKEN_KEY } from './constants';
+import { getToken } from '../token';
 import { ICheckResult } from './interfaces';
-import { verify } from '../auth';
-import { stringify } from '../utils';
+import { verify } from '../../auth';
 
 export const check = async (request: NowRequest, response: NowResponse) => {
-  const tokenRaw = request.headers[TOKEN_KEY];
-  const token = stringify(tokenRaw);
+  const token = getToken(request);
 
   if (!token) {
     const checkResult: ICheckResult = {
