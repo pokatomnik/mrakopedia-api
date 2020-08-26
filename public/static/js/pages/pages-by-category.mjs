@@ -10,11 +10,11 @@ import { Container } from '../components/container.mjs';
 export const PagesByCategory = () => {
   const { getPagesByCategory } = useApi();
   const {
-    params: { categoryName },
+    params: { title },
   } = useRouteData();
   const fetchPages = Hooks.useCallback(() => {
-    return getPagesByCategory(categoryName);
-  }, [categoryName, getPagesByCategory]);
+    return getPagesByCategory(title);
+  }, [title, getPagesByCategory]);
 
   return html`
     <${Preact.Fragment}>
@@ -22,7 +22,7 @@ export const PagesByCategory = () => {
     <${Main}>
       <${Container}>
         <h1 className="mt-5">
-          Категория: ${decodeURIComponent(categoryName)}
+          Категория: ${decodeURIComponent(title)}
         </h1>
       </${Container}>
       <${PageResults} fetchPages=${fetchPages} groupBy=${groupByFirstLetter} />

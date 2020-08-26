@@ -52,9 +52,9 @@ async function preparePages(params: Record<string, string>) {
 }
 
 export default allowCors((request: NowRequest, response: NowResponse) => {
-  const categoryName = stringify(request.query.categoryName);
+  const title = stringify(request.query.title);
 
-  if (!categoryName) {
+  if (!title) {
     response.status(404).json(Error('NOT_FOUND', STATUS_CODES[404] ?? ''));
     return;
   }
@@ -62,7 +62,7 @@ export default allowCors((request: NowRequest, response: NowResponse) => {
   const params: Record<string, string> = {
     action: 'query',
     list: 'categorymembers',
-    cmtitle: `Category:${encodeURIComponent(categoryName)}`,
+    cmtitle: `Category:${encodeURIComponent(title)}`,
     cmlimit: '500',
     format: 'json',
   };
@@ -77,7 +77,7 @@ export default allowCors((request: NowRequest, response: NowResponse) => {
         .json(
           Error(
             'FAILED_TO_TO_FETCH_PAGES_BY_CATEGORY',
-            `Failed to fetch pages by category ${categoryName}`
+            `Failed to fetch pages by category ${title}`
           )
         );
     });

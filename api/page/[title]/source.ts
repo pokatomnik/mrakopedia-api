@@ -19,8 +19,8 @@ const FETCH_PAGE_FAILED_ERROR = Error(
 );
 
 export default allowCors(async (request: NowRequest, response: NowResponse) => {
-  const name = stringify(request.query.name);
-  if (!name) {
+  const title = stringify(request.query.title);
+  if (!title) {
     response.status(404).json(ERROR_NOT_FOUND);
     return;
   }
@@ -29,14 +29,14 @@ export default allowCors(async (request: NowRequest, response: NowResponse) => {
   let sourceURL: URL | undefined = undefined;
 
   try {
-    page = await fetchPageByName(name);
+    page = await fetchPageByName(title);
   } catch {
     response.status(404).json(FETCH_PAGE_FAILED_ERROR);
     return;
   }
 
   try {
-    sourceURL = await wiki.page(name).then((page) => page.url());
+    sourceURL = await wiki.page(title).then((page) => page.url());
   } catch {
     response.json(500).json(ERROR_FAILED_FETCH_URL);
     return;
@@ -48,7 +48,7 @@ export default allowCors(async (request: NowRequest, response: NowResponse) => {
   }
 
   response.json({
-    title: name,
+    title: title,
     url: sourceURL.toString(),
   });
 });

@@ -43,9 +43,9 @@ export const makePageResponse = (title: string): IPageResponse => ({
   url: `/api/page/${encodeURIComponent(title)}`,
 });
 
-export const makeCategoryResponse = (categoryName: string) => ({
-  title: categoryName,
-  url: `/api/categories/${encodeURIComponent(categoryName)}`,
+export const makeCategoryResponse = (title: string) => ({
+  title: title,
+  url: `/api/categories/${encodeURIComponent(title)}`,
 });
 
 export const capitalize = (input: string) => {
@@ -56,12 +56,12 @@ export const capitalize = (input: string) => {
   return `${input.slice(0, 1).toLocaleUpperCase()}${input.slice(1)}`;
 };
 
-export const fetchPageByName = async (name: string): Promise<WikiJSPage> => {
+export const fetchPageByName = async (title: string): Promise<WikiJSPage> => {
   const pageError = new global.Error('No such page');
   let page: WikiJSPage | undefined = undefined;
 
   try {
-    page = await wiki.page(name);
+    page = await wiki.page(title);
   } catch {
     throw pageError;
   }

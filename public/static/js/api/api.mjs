@@ -19,19 +19,19 @@ export const useApi = () => {
     [getToken]
   );
   const getCategoriesByPage = Hooks.useCallback(
-    (pageName) => ApiCall(getToken()).get(apiCategoriesByPage(pageName)),
+    (title) => ApiCall(getToken()).get(apiCategoriesByPage(title)),
     [getToken]
   );
   const getPage = Hooks.useCallback(
-    (pageName) => ApiCall(getToken()).get(apiPage(pageName)),
+    (title) => ApiCall(getToken()).get(apiPage(title)),
     [getToken]
   );
   const getPagesByCategory = Hooks.useCallback(
-    (categoryName) => ApiCall(getToken()).get(apiPagesByCategory(categoryName)),
+    (title) => ApiCall(getToken()).get(apiPagesByCategory(title)),
     [getToken]
   );
   const getRelated = Hooks.useCallback(
-    (pageName) => ApiCall(getToken()).get(apiRelated(pageName)),
+    (title) => ApiCall(getToken()).get(apiRelated(title)),
     [getToken]
   );
   const search = Hooks.useCallback(
@@ -39,7 +39,7 @@ export const useApi = () => {
     [getToken]
   );
   const getSourceUrl = Hooks.useCallback(
-    (pageName) => ApiCall(getToken()).get(apiSourceUrl(pageName)),
+    (title) => ApiCall(getToken()).get(apiSourceUrl(title)),
     [getToken]
   );
   const getStoriesOfMonth = Hooks.useCallback(

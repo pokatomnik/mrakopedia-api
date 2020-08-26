@@ -1,9 +1,9 @@
 import { NowRequest, NowResponse } from '@vercel/node';
 import { Document } from 'mongoose';
-import { Error } from '../utils';
-import { connect, DB_ERROR } from '../db/connection';
-import { UserModel } from '../db/models/User';
-import { sign } from '../auth';
+import { Error } from '../../utils';
+import { DB_ERROR } from '../../db/connection';
+import { UserModel } from '../../db/models/User';
+import { sign } from '../../auth';
 import { ILoginSuccess } from './interfaces';
 
 const WRONG_CREDENTIALS_ERROR = Error(
@@ -37,8 +37,7 @@ export const login = async (request: NowRequest, response: NowResponse) => {
   let user: Document | null = null;
 
   try {
-    const connection = connect();
-    user = await UserModel(connection).findOne({
+    user = await UserModel().findOne({
       email,
       passwordHash,
     });

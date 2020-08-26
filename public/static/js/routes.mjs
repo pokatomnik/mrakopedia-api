@@ -17,10 +17,10 @@ export const RouteIndex = {
 };
 
 export const RoutePage = {
-  url: '/page/:pageName',
+  url: '/page/:title',
   Component: Page,
-  link(pageName) {
-    return `/page/${encodeURIComponent(pageName)}`;
+  link(title) {
+    return `/page/${encodeURIComponent(title)}`;
   },
 };
 
@@ -41,10 +41,10 @@ export const RouteCategories = {
 };
 
 export const RoutePagesByCategory = {
-  url: '/categories/:categoryName',
+  url: '/categories/:title',
   Component: PagesByCategory,
-  link(categoryName) {
-    return `/categories/${encodeURIComponent(categoryName)}`;
+  link(title) {
+    return `/categories/${encodeURIComponent(title)}`;
   },
 };
 
@@ -57,18 +57,18 @@ export const RouteStoriesOfMonth = {
 };
 
 export const RouteLike = {
-  url: '/page/:pageName/like',
+  url: '/page/:title/like',
   Component: Like,
-  link(pageName) {
-    return `/page/${encodeURIComponent(pageName)}/like`;
+  link(title) {
+    return `/page/${encodeURIComponent(title)}/like`;
   },
 };
 
 export const RouteCategoriesByPage = {
-  url: '/page/:pageName/categories',
+  url: '/page/:title/categories',
   Component: CategoriesByPage,
-  link(pageName) {
-    return `/page/${encodeURIComponent(pageName)}/categories`;
+  link(title) {
+    return `/page/${encodeURIComponent(title)}/categories`;
   },
 };
 

@@ -1,7 +1,7 @@
 import JWT from 'jsonwebtoken';
 import { getSecret } from './secret';
 
-interface ISignParams {
+export interface ISignParams {
   email: string;
   id: string;
   userName: string;

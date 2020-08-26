@@ -20,8 +20,8 @@ const FETCH_LINKS_FAILED_ERROR = Error(
 );
 
 export default allowCors(async (req: NowRequest, res: NowResponse) => {
-  const name = stringify(req.query.name);
-  if (!name) {
+  const title = stringify(req.query.title);
+  if (!title) {
     res.status(404).json(Error('NO_PAGE_NAME', 'Missing page name'));
     return;
   }
@@ -30,7 +30,7 @@ export default allowCors(async (req: NowRequest, res: NowResponse) => {
   let links: Array<string> | undefined = undefined;
 
   try {
-    page = await fetchPageByName(name);
+    page = await fetchPageByName(title);
   } catch {
     res.status(404).json(FETCH_PAGE_FAILED_ERROR);
     return;

@@ -12,15 +12,15 @@ const page404 = new Page(ERROR_404, ERROR_404, { simpleTitle: true });
 const page500 = new Page(ERROR_500, ERROR_500, { simpleTitle: true });
 
 export default allowCors(async (req: NowRequest, res: NowResponse) => {
-  const name = stringify(req.query.name);
-  if (!name) {
+  const title = stringify(req.query.title);
+  if (!title) {
     res.status(404).send(page404.render());
     return;
   }
 
   let page: PageResponse | null = null;
   try {
-    page = await wiki.page(name);
+    page = await wiki.page(title);
   } catch {
     res.status(404).send(page404.render());
     return;
@@ -34,5 +34,5 @@ export default allowCors(async (req: NowRequest, res: NowResponse) => {
     return;
   }
 
-  res.send(new Page(name, html).render());
+  res.send(new Page(title, html).render());
 });
