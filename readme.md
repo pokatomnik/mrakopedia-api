@@ -114,7 +114,7 @@ interface ICategory {
 type Response = Array<ICategory>;
 ```
 
-Get the main picture related to page with TITLE:
+### Get the main picture related to page with TITLE:
 
 ```
 GET /api/page/TITLE/picture
@@ -122,7 +122,7 @@ GET /api/page/TITLE/picture
 
 Will return the image (`jpg`/`png`/`svg`) for the page
 
-Get the source url for the page with TITLE:
+### Get the source url for the page with TITLE:
 
 ```
 GET /api/page/TITLE/source
@@ -137,7 +137,7 @@ interface IMrakopediaSource {
 }
 ```
 
-Get all categories (500 max)
+### Get all categories (500 max)
 
 ```
 GET /api/categories
@@ -153,7 +153,7 @@ interface ICategory {
 type Response = Array<ICategory>;
 ```
 
-Get all pages by category
+### Get all pages by category
 
 ```
 GET /api/categories/CATEGORY_NAME
@@ -169,7 +169,7 @@ interface IPage {
 type Response = Array<IPage>;
 ```
 
-Get random page
+### Get random page
 
 ```
 GET /api/random
@@ -184,7 +184,7 @@ interface IPage {
 }
 ```
 
-Get stories of the month
+### Get stories of the month
 
 ```
 GET /api/hotm
