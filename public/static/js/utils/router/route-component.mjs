@@ -16,14 +16,14 @@ export const useRouteData = () => {
 
 export const RouterComponent = ({ routes, fallback: Fallback }) => {
   const { urlData, push } = useHistory();
-  const patnName = urlData.getPathName();
+  const pathName = urlData.getPathName();
   const match = routes.find(
-    (currentRoute) => matchParams(patnName, currentRoute.url).match
+    (currentRoute) => matchParams(pathName, currentRoute.url).match
   );
 
   const Component = match ? match.Component : Fallback;
 
-  const params = match ? matchParams(patnName, match.url).params : {};
+  const params = match ? matchParams(pathName, match.url).params : {};
   const query = urlData.getOptions();
 
   const urlDataContextValue = Hooks.useMemo(
