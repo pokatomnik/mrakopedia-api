@@ -1,10 +1,11 @@
-import { html, Hooks } from '../preact/preact.mjs';
+import Preact, { html, Hooks } from '../preact/preact.mjs';
 import {
   RouteIndex,
   RouteSearch,
   RouteCategories,
   RouteStoriesOfMonth,
   RouteLogin,
+  RouteFavorites,
 } from '../routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 import { useAuth } from '../utils/auth/auth.mjs';
@@ -90,6 +91,12 @@ export const Header = ({ children }) => {
     ? navMenuItemClass
     : `${navMenuItemClass} disabled`;
 
+  const favoritesLink = user
+    ? html`<${NavLink} link=${RouteFavorites.link()}>
+      Избранное
+    </${NavLink}>`
+    : html`<${Preact.Fragment} />`;
+
   return html`
     <header>
       <nav className="navbar navbar-dark bg-dark">
@@ -147,6 +154,7 @@ export const Header = ({ children }) => {
             <${NavLink} link=${RouteStoriesOfMonth.link()}>
               Истории месяца
             </${NavLink}>
+            ${favoritesLink}
             ${children}
           </ul>
           <form className="form-inline mt-2 mt-md-0" onSubmit=${handleSubmit}>
