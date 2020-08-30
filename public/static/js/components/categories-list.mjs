@@ -3,6 +3,7 @@ import { useRouteData } from '../utils/router/route-component.mjs';
 import { ListView } from './list-view.mjs';
 import { RoutePagesByCategory } from '../routes.mjs';
 import { PreloaderContainer } from './preloader.mjs';
+import { useIfMounted } from '../utils/if-mounted.mjs';
 
 const NO_CATEGORIES = 'Не нашлось категорий:(';
 const CATEGORIES_REQUEST_FAILED =
@@ -26,42 +27,33 @@ const CategoryItem = ({ categoryTitle }) => {
 };
 
 export const CategoriesList = ({ fetchCategories, groupBy }) => {
-  const mounted = Hooks.useRef(false);
+  const ifMounted = useIfMounted();
   const [categories, setCategories] = Hooks.useState([]);
   const [error, setError] = Hooks.useState('');
   const [noResults, setNoResults] = Hooks.useState(false);
   const [isLoading, setIsLoading] = Hooks.useState(false);
 
   Hooks.useEffect(() => {
-    mounted.current = true;
     setError('');
     setIsLoading(true);
     setNoResults(false);
 
     fetchCategories()
-      .then((res) => {
-        if (!mounted.current) {
-          return;
-        }
-
-        setCategories(res);
-        setIsLoading(false);
-        setNoResults(res.length === 0);
-      })
-      .catch(() => {
-        if (!mounted.current) {
-          return;
-        }
-
-        setError(CATEGORIES_REQUEST_FAILED);
-        setIsLoading(false);
-        setNoResults(false);
-      });
-
-    return () => {
-      mounted.current = false;
-    };
-  }, []);
+      .then(
+        ifMounted((res) => {
+          setCategories(res);
+          setIsLoading(false);
+          setNoResults(res.length === 0);
+        })
+      )
+      .catch(
+        ifMounted(() => {
+          setError(CATEGORIES_REQUEST_FAILED);
+          setIsLoading(false);
+          setNoResults(false);
+        })
+      );
+  }, [ifMounted]);
 
   if (isLoading) {
     return html`
