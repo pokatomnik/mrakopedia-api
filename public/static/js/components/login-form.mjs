@@ -3,6 +3,7 @@ import { useAuth } from '../utils/auth/auth.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 import { RouteIndex } from '../routes.mjs';
 import { style } from '../utils/style.mjs';
+import { useIfMounted } from '../utils/if-mounted.mjs';
 
 const FORM_STYLE = style({
   width: '100%',
@@ -16,17 +17,10 @@ const EMAIL_INPUT_STYLE = style({
 });
 
 export const LoginForm = () => {
-  const mountedRef = Hooks.useRef(false);
+  const ifMounted = useIfMounted();
   const [isSigningIn, setIsSigningIn] = Hooks.useState(false);
   const { user, login } = useAuth();
   const { push } = useRouteData();
-
-  Hooks.useEffect(() => {
-    mountedRef.current = true;
-    return () => {
-      mountedRef.current = false;
-    };
-  });
 
   Hooks.useEffect(() => {
     if (user) {
@@ -49,21 +43,19 @@ export const LoginForm = () => {
 
       setIsSigningIn(true);
       login(email.toLocaleLowerCase(), password)
-        .then(() => {
-          if (!mountedRef.current) {
-            return;
-          }
-          setIsSigningIn(false);
-        })
-        .catch(() => {
-          if (!mountedRef.current) {
-            return;
-          }
-          alert('Неверные данные для входа');
-          setIsSigningIn(false);
-        });
+        .then(
+          ifMounted(() => {
+            setIsSigningIn(false);
+          })
+        )
+        .catch(
+          ifMounted(() => {
+            alert('Неверные данные для входа');
+            setIsSigningIn(false);
+          })
+        );
     },
-    [email, password]
+    [email, password, ifMounted]
   );
 
   return html`

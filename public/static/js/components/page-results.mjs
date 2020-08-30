@@ -3,6 +3,7 @@ import { useRouteData } from '../utils/router/route-component.mjs';
 import { ListView } from './list-view.mjs';
 import { RoutePage } from '../routes.mjs';
 import { PreloaderContainer } from './preloader.mjs';
+import { useIfMounted } from '../utils/if-mounted.mjs';
 
 const SEARCH_ERROR =
   'Поиск завершился ошибкой, попробуйте позднее или поменяйте строку поиска';
@@ -23,41 +24,33 @@ const PageResultItem = ({ title }) => {
 };
 
 export const PageResults = ({ fetchPages, groupBy }) => {
-  const mounted = Hooks.useRef(false);
+  const ifMounted = useIfMounted();
   const [searchResults, setSearchResults] = Hooks.useState([]);
   const [error, setError] = Hooks.useState('');
   const [noResults, setNoResults] = Hooks.useState(false);
   const [isLoading, setIsLoading] = Hooks.useState(false);
 
   Hooks.useEffect(() => {
-    mounted.current = true;
     setError('');
     setIsLoading(true);
     setNoResults(false);
 
     fetchPages()
-      .then((res) => {
-        if (!mounted.current) {
-          return;
-        }
-
-        setSearchResults(res);
-        setIsLoading(false);
-        setNoResults(res.length === 0);
-      })
-      .catch(() => {
-        if (!mounted.current) {
-          return;
-        }
-
-        setError(SEARCH_ERROR);
-        setIsLoading(false);
-        setNoResults(false);
-      });
-    return () => {
-      mounted.current = false;
-    };
-  }, [fetchPages]);
+      .then(
+        ifMounted((res) => {
+          setSearchResults(res);
+          setIsLoading(false);
+          setNoResults(res.length === 0);
+        })
+      )
+      .catch(
+        ifMounted(() => {
+          setError(SEARCH_ERROR);
+          setIsLoading(false);
+          setNoResults(false);
+        })
+      );
+  }, [fetchPages, ifMounted]);
 
   if (isLoading) {
     return html`
