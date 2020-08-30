@@ -6,9 +6,13 @@ import {
   RouteStoriesOfMonth,
   RouteLogin,
   RouteFavorites,
+  RoutePage,
+  RouteFallback,
 } from '../routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 import { useAuth } from '../utils/auth/auth.mjs';
+import { useIfMounted } from '../utils/if-mounted.mjs';
+import { useApi } from '../api/api.mjs';
 
 const COLLAPSE_ID = 'navbarCollapse';
 
@@ -32,8 +36,10 @@ export const NavLink = ({ link, children }) => {
 };
 
 export const Header = ({ children }) => {
+  const ifMounted = useIfMounted();
   const { push } = useRouteData();
   const { user, logout } = useAuth();
+  const { getRandom } = useApi();
   const [searchString, setSearchString] = Hooks.useState('');
 
   const handleLogout = Hooks.useCallback(
@@ -81,6 +87,25 @@ export const Header = ({ children }) => {
       push(RouteSearch.link(searchString));
     },
     [searchString, push]
+  );
+
+  const handleRandomClick = Hooks.useCallback(
+    (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      getRandom()
+        .then(
+          ifMounted(({ title }) => {
+            push(RoutePage.link(title));
+          })
+        )
+        .catch(
+          ifMounted(() => {
+            push(RouteFallback.link());
+          })
+        );
+    },
+    [getRandom, push, ifMounted]
   );
 
   const navMenuItemClass = 'dropdown-item';
@@ -147,6 +172,11 @@ export const Header = ({ children }) => {
                   Выйти
                 </a>
               </div>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#" onClick=${handleRandomClick}>
+                Случайная страница
+              </a>
             </li>
             <${NavLink} link=${RouteCategories.link()}>
               Категории

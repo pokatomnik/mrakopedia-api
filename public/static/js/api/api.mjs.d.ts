@@ -28,6 +28,7 @@ interface IApi {
   getSourceUrl: (title: string) => Promise<ISourceUrl>;
   getStoriesOfMonth: () => Promise<Array<IPage>>;
   getAllFavorites: () => Promise<Array<IPage>>;
+  getRandom: () => Promise<IPage>;
   isFavorite: (title: string) => Promise<IFavorite>;
   addToFavorites: (title: string) => Promise<void>;
   removeFromFavorites: (title: string) => Promise<void>;

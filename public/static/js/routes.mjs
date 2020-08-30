@@ -1,3 +1,4 @@
+import Preact, { html } from './preact/preact.mjs';
 import { Index } from './pages/index.mjs';
 import { Page } from './pages/page.mjs';
 import { Search } from './pages/search.mjs';
@@ -8,6 +9,19 @@ import { Like } from './pages/like.mjs';
 import { CategoriesByPage } from './pages/categories-by-page.mjs';
 import { Login } from './pages/login.mjs';
 import { Favorites } from './pages/favorites.mjs';
+
+/**
+ * Do not use this directly in the routes array,
+ * because the Router component handles this automatically.
+ */
+
+export const RouteFallback = {
+  url: '/404',
+  Component: () => html`<${Preact.Fragment} />`,
+  link() {
+    return this.url;
+  },
+};
 
 export const RouteIndex = {
   url: '/',
