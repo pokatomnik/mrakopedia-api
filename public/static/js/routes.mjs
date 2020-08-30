@@ -7,6 +7,7 @@ import { StoriesOfMonth } from './pages/stories-of-month.mjs';
 import { Like } from './pages/like.mjs';
 import { CategoriesByPage } from './pages/categories-by-page.mjs';
 import { Login } from './pages/login.mjs';
+import { Favorites } from './pages/favorites.mjs';
 
 export const RouteIndex = {
   url: '/',
@@ -80,6 +81,14 @@ export const RouteLogin = {
   },
 };
 
+export const RouteFavorites = {
+  url: '/favorites',
+  Component: Favorites,
+  link() {
+    return this.url;
+  },
+};
+
 export const routes = [
   RouteIndex,
   RoutePage,
@@ -90,4 +99,5 @@ export const routes = [
   RouteLike,
   RouteCategoriesByPage,
   RouteLogin,
+  RouteFavorites,
 ];
