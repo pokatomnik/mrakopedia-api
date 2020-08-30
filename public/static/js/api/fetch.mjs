@@ -42,8 +42,9 @@ export const ApiCall = (token) => {
     return handleResponse(response);
   };
 
-  const get = withoutBody('GET');
-  const post = withBody('POST');
-
-  return { get, post };
+  return {
+    get: withoutBody('GET'),
+    post: withBody('POST'),
+    delete: withoutBody('DELETE'),
+  };
 };

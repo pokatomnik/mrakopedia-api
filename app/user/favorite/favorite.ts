@@ -46,14 +46,14 @@ export const favorite = async (request: NowRequest, response: NowResponse) => {
   if (method === 'POST')
     try {
       await favoriteModel.create(query);
-      return response.send('');
+      return response.json(null);
     } catch (e) {
       response.status(500).json(Errors.FAILED_TO_ADD_FAVORITE);
     }
   else
     try {
       await favoriteModel.findOneAndRemove(query);
-      return response.send('');
+      return response.json(null);
     } catch (e) {
       response.status(500).json(Errors.FAILED_TO_REMOVE_FAVORITE);
     }

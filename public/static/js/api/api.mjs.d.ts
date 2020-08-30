@@ -13,6 +13,11 @@ interface ISourceUrl {
   url: string;
 }
 
+interface IFavorite {
+  isFavorite: boolean;
+  title: string;
+}
+
 interface IApi {
   getCategories: () => Promise<Array<ICategory>>;
   getCategoriesByPage: (title: string) => Promise<Array<ICategory>>;
@@ -22,6 +27,10 @@ interface IApi {
   search: (searchInput) => Promise<Array<IPage>>;
   getSourceUrl: (title: string) => Promise<ISourceUrl>;
   getStoriesOfMonth: () => Promise<Array<IPage>>;
+  getAllFavorites: () => Promise<Array<IPage>>;
+  isFavorite: (title: string) => Promise<IFavorite>;
+  addToFavorites: (title: string) => Promise<void>;
+  removeFromFavorites: (title: string) => Promise<void>;
 }
 
 export function useApi(): IApi;
