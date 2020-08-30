@@ -1,0 +1,6 @@
+{
+  "env": {
+    "DB_CONNECTION_STRING": "@db_connection_string",
+    "SECRET": "@secret"
+  }
+}

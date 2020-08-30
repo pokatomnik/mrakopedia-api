@@ -7,6 +7,9 @@ import {
   apiSearch,
   apiSourceUrl,
   apiStoriesOfMonth,
+  apiAllFavorites,
+  apiFavorite,
+  apiIsFavorite,
 } from './api-routes.mjs';
 import { ApiCall } from './fetch.mjs';
 import { useAuth } from '../utils/auth/auth.mjs';
@@ -47,6 +50,26 @@ export const useApi = () => {
     [getToken]
   );
 
+  const getAllFavorites = Hooks.useCallback(
+    () => ApiCall(getToken()).get(apiAllFavorites()),
+    [getToken]
+  );
+
+  const isFavorite = Hooks.useCallback(
+    (title) => ApiCall(getToken()).get(apiIsFavorite(title)),
+    [getToken]
+  );
+
+  const addToFavorites = Hooks.useCallback(
+    (title) => ApiCall(getToken()).post(apiFavorite(title), {}),
+    [getToken]
+  );
+
+  const removeFromFavorites = Hooks.useCallback(
+    (title) => ApiCall(getToken()).delete(apiFavorite(title)),
+    [getToken]
+  );
+
   return {
     getCategories,
     getCategoriesByPage,
@@ -56,5 +79,9 @@ export const useApi = () => {
     search,
     getSourceUrl,
     getStoriesOfMonth,
+    getAllFavorites,
+    isFavorite,
+    addToFavorites,
+    removeFromFavorites,
   };
 };

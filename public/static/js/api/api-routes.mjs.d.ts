@@ -7,3 +7,6 @@ export function apiRelated(title: string): string;
 export function apiCategoriesByPage(title: string): string;
 export function apiSourceUrl(title: string): string;
 export function apiLogin(): string;
+export function apiFavorite(title: string): string;
+export function apiAllFavorites(): string;
+export function apiIsFavorite(title: string): string;
