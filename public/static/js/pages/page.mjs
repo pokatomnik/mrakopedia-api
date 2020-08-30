@@ -26,7 +26,7 @@ const useIsFavorite = () => {
         setIsFavorite(isFavorite);
       })
     );
-  }, [title, checkIsFavorite, user]);
+  }, [title, checkIsFavorite, user, ifMounted]);
   return isFavorite;
 };
 
@@ -44,7 +44,7 @@ const useMrakopediaUrl = () => {
         setMrakopediaUrl(url);
       })
     );
-  }, [title, getSourceUrl]);
+  }, [title, getSourceUrl, ifMounted]);
 
   return mrakopediaUrl;
 };
@@ -79,7 +79,7 @@ export const Page = () => {
         })
       );
     },
-    [title, isFavorite, addToFavorites, removeFromFavorites]
+    [title, isFavorite, addToFavorites, removeFromFavorites, ifMounted]
   );
 
   const favoritesBlock =
