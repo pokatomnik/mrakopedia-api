@@ -1,3 +1,4 @@
+// Common URLs
 export function apiPage(title: string): string;
 export function apiSearch(searchInput: string): string;
 export function apiCategories(): string;
@@ -6,6 +7,9 @@ export function apiStoriesOfMonth(): string;
 export function apiRelated(title: string): string;
 export function apiCategoriesByPage(title: string): string;
 export function apiSourceUrl(title: string): string;
+export function apiRandom(): string;
+
+// User-related URLs
 export function apiLogin(): string;
 export function apiFavorite(title: string): string;
 export function apiAllFavorites(): string;

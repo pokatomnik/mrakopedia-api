@@ -5,7 +5,10 @@ interface IRouteObject<T> {
   Component: () => Element;
   link: (params: T) => string;
 }
+// Fallback page (404)
+export const RouteFallback: IRouteObject<void>;
 
+// Route pages
 export const RouteIndex: IRouteObject<void>;
 export const RoutePage: IRouteObject<string>;
 export const RouteSearch: IRouteObject<string>;

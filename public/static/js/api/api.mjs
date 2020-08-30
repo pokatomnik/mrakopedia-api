@@ -7,6 +7,7 @@ import {
   apiSearch,
   apiSourceUrl,
   apiStoriesOfMonth,
+  apiRandom,
   apiAllFavorites,
   apiFavorite,
   apiIsFavorite,
@@ -45,6 +46,12 @@ export const useApi = () => {
     (title) => ApiCall(getToken()).get(apiSourceUrl(title)),
     [getToken]
   );
+
+  const getRandom = Hooks.useCallback(
+    () => ApiCall(getToken()).get(apiRandom()),
+    [getToken]
+  );
+
   const getStoriesOfMonth = Hooks.useCallback(
     () => ApiCall(getToken()).get(apiStoriesOfMonth()),
     [getToken]
@@ -79,6 +86,7 @@ export const useApi = () => {
     search,
     getSourceUrl,
     getStoriesOfMonth,
+    getRandom,
     getAllFavorites,
     isFavorite,
     addToFavorites,
