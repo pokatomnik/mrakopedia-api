@@ -14,7 +14,7 @@ export const allFavorites = async (
   const token = getToken(request);
 
   if (!token) {
-    response.status(403).json(CommonErrors.NO_TOKEN);
+    return response.status(403).json(CommonErrors.NO_TOKEN);
   }
 
   let tokenParams: ISignParams | null = null;
