@@ -4,7 +4,8 @@ import { stringify } from '../../utils';
 import { FavoriteModel } from '../../db/models/Favorite';
 import { getToken } from '../token';
 import { verify, ISignParams } from '../../auth';
-import * as Errors from './errors';
+import * as FavoriteErrors from './errors';
+import * as CommonErrors from '../common-errors';
 import { IFavoriteFound } from './interfaces';
 
 export const isFavorite = async (
@@ -17,11 +18,11 @@ export const isFavorite = async (
   const token = getToken(request);
 
   if (!token) {
-    return response.status(403).json(Errors.NO_TOKEN);
+    return response.status(403).json(CommonErrors.NO_TOKEN);
   }
 
   if (!favoriteRaw) {
-    return response.status(400).json(Errors.NO_PAGE_ERROR);
+    return response.status(400).json(FavoriteErrors.NO_PAGE_ERROR);
   }
 
   let tokenParams: ISignParams | null = null;
@@ -29,7 +30,7 @@ export const isFavorite = async (
   try {
     tokenParams = await verify<ISignParams>(token);
   } catch (e) {
-    return response.status(403).json(Errors.INVALID_TOKEN);
+    return response.status(403).json(CommonErrors.INVALID_TOKEN);
   }
 
   const favoriteModel = FavoriteModel();
@@ -48,6 +49,6 @@ export const isFavorite = async (
     };
     return response.json(respondWith);
   } catch (e) {
-    response.status(500).json(Errors.FAILED_TO_ADD_FAVORITE);
+    response.status(500).json(FavoriteErrors.FAILED_TO_ADD_FAVORITE);
   }
 };
