@@ -4,7 +4,6 @@ import {
   Error,
   makeCategoryResponse,
   makeSortFnBy,
-  allowCors,
 } from '../../../app/utils';
 import { wiki } from '../../../app/Wiki';
 
@@ -15,7 +14,7 @@ const FETCH_LINKS_FAILED_ERROR = Error(
 
 const SPLIT_BY = ':';
 
-export default allowCors(async (req: NowRequest, res: NowResponse) => {
+export default async (req: NowRequest, res: NowResponse) => {
   const title = stringify(req.query.title);
   if (!title) {
     res.status(404).json(Error('NO_PAGE_NAME', 'Missing page name'));
@@ -40,4 +39,4 @@ export default allowCors(async (req: NowRequest, res: NowResponse) => {
     .filter(Boolean);
 
   res.json(titles.map(makeCategoryResponse).sort(makeSortFnBy('title')));
-});
+};
