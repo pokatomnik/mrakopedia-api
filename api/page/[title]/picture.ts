@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { NowRequest, NowResponse } from '@vercel/node';
-import { stringify, allowCors } from '../../../app/utils';
+import { stringify } from '../../../app/utils';
 import { wiki } from '../../../app/Wiki';
 
 const SVG_CONTENTS = `<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" viewBox="0 0 0 0" />`;
@@ -9,7 +9,7 @@ const CONTENT_TYPE_SVG = 'image/svg+xml';
 const CONTENT_TYPE_KEY = 'content-type';
 const CONTENT_LENGTH_KEY = 'content-length';
 
-export default allowCors(async (request: NowRequest, response: NowResponse) => {
+export default async (request: NowRequest, response: NowResponse) => {
   const title = stringify(request.query.title);
   if (!title) {
     response.setHeader(CONTENT_TYPE_KEY, CONTENT_TYPE_SVG);
@@ -50,4 +50,4 @@ export default allowCors(async (request: NowRequest, response: NowResponse) => {
     response.setHeader(CONTENT_TYPE_KEY, CONTENT_TYPE_SVG);
     response.send(SVG_CONTENTS);
   }
-});
+};

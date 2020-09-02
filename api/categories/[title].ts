@@ -7,7 +7,6 @@ import {
   makeSearch,
   makePageResponse,
   makeSortFnBy,
-  allowCors,
 } from '../../app/utils';
 import { IWikiQueryResponse } from '../../app/IWikiQueryResponse';
 import { MRAKOPEDIA_API_ENDPOINT } from '../../app/constants';
@@ -51,7 +50,7 @@ async function preparePages(params: Record<string, string>) {
     .reduce((acc, pageResponses) => [...acc, ...pageResponses], []);
 }
 
-export default allowCors((request: NowRequest, response: NowResponse) => {
+export default (request: NowRequest, response: NowResponse) => {
   const title = stringify(request.query.title);
 
   if (!title) {
@@ -81,4 +80,4 @@ export default allowCors((request: NowRequest, response: NowResponse) => {
           )
         );
     });
-});
+};
