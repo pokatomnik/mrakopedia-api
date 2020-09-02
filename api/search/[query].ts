@@ -10,8 +10,7 @@ import { wiki } from '../../app/Wiki';
 export default (req: NowRequest, res: NowResponse) => {
   const query = stringify(req.query.query);
   if (!query) {
-    res.json([]);
-    return;
+    return res.json([]);
   }
 
   wiki
@@ -21,9 +20,11 @@ export default (req: NowRequest, res: NowResponse) => {
       return titles.map(makePageResponse);
     })
     .then((results) => {
-      res.json(results.sort(makeSortFnBy('title')));
+      return res.json(results.sort(makeSortFnBy('title')));
     })
     .catch(() => {
-      res.status(500).json(Error('FAILED_SEARCH_RESPONSE', 'Search failed'));
+      return res
+        .status(500)
+        .json(Error('FAILED_SEARCH_RESPONSE', 'Search failed'));
     });
 };

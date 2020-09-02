@@ -13,16 +13,10 @@ const FETCH_PAGE_FAILED_ERROR = Error(
   'Failed to fetch page'
 );
 
-const FETCH_LINKS_FAILED_ERROR = Error(
-  'LINKS_FETCH_FAILED',
-  'Failed to fetch links'
-);
-
 export default async (req: NowRequest, res: NowResponse) => {
   const title = stringify(req.query.title);
   if (!title) {
-    res.status(404).json(Error('NO_PAGE_NAME', 'Missing page name'));
-    return;
+    return res.status(404).json(Error('NO_PAGE_NAME', 'Missing page name'));
   }
 
   let page: WikiJSPage | undefined = undefined;
@@ -31,8 +25,7 @@ export default async (req: NowRequest, res: NowResponse) => {
   try {
     page = await fetchPageByName(title);
   } catch {
-    res.status(404).json(FETCH_PAGE_FAILED_ERROR);
-    return;
+    return res.status(404).json(FETCH_PAGE_FAILED_ERROR);
   }
 
   try {
@@ -41,5 +34,5 @@ export default async (req: NowRequest, res: NowResponse) => {
     links = [];
   }
 
-  res.json(links.map(makePageResponse).sort(makeSortFnBy('title')));
+  return res.json(links.map(makePageResponse).sort(makeSortFnBy('title')));
 };

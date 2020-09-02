@@ -22,13 +22,11 @@ export default async (_: unknown, response: NowResponse) => {
   try {
     page = await wiki.page(HISTORY_OF_THE_MONTH_PAGE_NAME);
   } catch {
-    response.status(500).json(PAGE_FETCH_ERROR);
-    return;
+    return response.status(500).json(PAGE_FETCH_ERROR);
   }
 
   if (page === null) {
-    response.status(500).json(PAGE_FETCH_ERROR);
-    return;
+    return response.status(500).json(PAGE_FETCH_ERROR);
   }
 
   let links: Array<string> = [];
@@ -36,9 +34,8 @@ export default async (_: unknown, response: NowResponse) => {
   try {
     links = await page.links();
   } catch {
-    response.status(500).json(LINKS_FETCH_ERROR);
-    return;
+    return response.status(500).json(LINKS_FETCH_ERROR);
   }
 
-  response.json(links.map(makePageResponse).sort(makeSortFnBy('title')));
+  return response.json(links.map(makePageResponse).sort(makeSortFnBy('title')));
 };

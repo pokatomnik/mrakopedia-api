@@ -49,6 +49,6 @@ export const isFavorite = async (
     };
     return response.json(respondWith);
   } catch (e) {
-    response.status(500).json(FavoriteErrors.FAILED_TO_ADD_FAVORITE);
+    return response.status(500).json(FavoriteErrors.FAILED_TO_ADD_FAVORITE);
   }
 };
