@@ -56,7 +56,83 @@ interface ICheckResult {
 }
 ```
 
-## Available URLS are:
+### Add page to favorites:
+
+```
+POST /api/user?action=favorite&favorite=PAGE_TITLE
+```
+
+### Remove pages from favorites:
+
+```
+DELETE /api/user?action=favorite&favorite=PAGE_TITLE
+```
+
+### Check if the page is in favorites:
+
+```
+GET /api/user?action=is-favorite&favorite=PAGE_TITLE
+```
+
+The result will be:
+
+```typescript
+interface IFavoriteFound {
+  isFavorite: boolean;
+  title: string;
+}
+```
+
+### Get all user favorites:
+
+```
+GET /api/user?action=all-favorites
+```
+
+The result will be:
+
+```typescript
+interface IPage {
+  title: string;
+  url: string;
+}
+type Response = Array<IPage>;
+```
+
+### Invite user:
+
+```
+POST /api/user?action=invite
+```
+
+The result will be:
+
+```typescript
+interface IInvite {
+  id: string;
+  uuid: string;
+  invitingUserId: string;
+}
+```
+
+### Show my invites:
+
+```
+GET /api/user?action=my-invites
+```
+
+The result will be:
+
+```typescript
+interface IInvite {
+  id: string;
+  uuid: string;
+  invitingUserId: string;
+}
+type Response = Array<IInvite>;
+```
+
+## Unprotected URLS are:
 
 ### Search
 
