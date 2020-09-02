@@ -53,10 +53,10 @@ export default (_: unknown, response: NowResponse) => {
     )
     .then((entries) => entries.map(makeCategoryResponse))
     .then((entries) => {
-      response.json(entries.sort(makeSortFnBy('title')));
+      return response.json(entries.sort(makeSortFnBy('title')));
     })
     .catch(() => {
-      response
+      return response
         .status(500)
         .json(Error('FAILED_GET_CATEGORIES', 'Categories reqest failed'));
     });

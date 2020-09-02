@@ -1,6 +1,5 @@
 import { NowRequest, NowResponse } from '@vercel/node';
 import { stringify, Error, fetchPageByName } from '../../../app/utils';
-import { wiki } from '../../../app/Wiki';
 import { Page as WikiJSPage } from 'wikijs';
 
 const ERROR_NOT_FOUND = Error('ERROR_SOURCE_NOT_FOUND', 'Source not found');
@@ -16,8 +15,7 @@ const FETCH_PAGE_FAILED_ERROR = Error(
 export default async (request: NowRequest, response: NowResponse) => {
   const title = stringify(request.query.title);
   if (!title) {
-    response.status(404).json(ERROR_NOT_FOUND);
-    return;
+    return response.status(404).json(ERROR_NOT_FOUND);
   }
 
   let page: WikiJSPage | undefined = undefined;
@@ -26,23 +24,20 @@ export default async (request: NowRequest, response: NowResponse) => {
   try {
     page = await fetchPageByName(title);
   } catch {
-    response.status(404).json(FETCH_PAGE_FAILED_ERROR);
-    return;
+    return response.status(404).json(FETCH_PAGE_FAILED_ERROR);
   }
 
   try {
-    sourceURL = await wiki.page(title).then((page) => page.url());
+    sourceURL = await page.url();
   } catch {
-    response.json(500).json(ERROR_FAILED_FETCH_URL);
-    return;
+    return response.status(500).json(ERROR_FAILED_FETCH_URL);
   }
 
   if (!sourceURL) {
-    response.status(404).json(ERROR_NOT_FOUND);
-    return;
+    return response.status(404).json(ERROR_NOT_FOUND);
   }
 
-  response.json({
+  return response.json({
     title: title,
     url: sourceURL.toString(),
   });

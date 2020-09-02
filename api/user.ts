@@ -9,7 +9,7 @@ export default (request: NowRequest, response: NowResponse) => {
   if (handler) {
     return handler(request, response);
   } else {
-    response.json({
+    return response.json({
       availableActions: Object.keys(actionMap),
     });
   }

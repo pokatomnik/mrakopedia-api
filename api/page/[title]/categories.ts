@@ -17,26 +17,23 @@ const SPLIT_BY = ':';
 export default async (req: NowRequest, res: NowResponse) => {
   const title = stringify(req.query.title);
   if (!title) {
-    res.status(404).json(Error('NO_PAGE_NAME', 'Missing page name'));
-    return;
+    return res.status(404).json(Error('NO_PAGE_NAME', 'Missing page name'));
   }
 
   let rawTitles: Array<string> | undefined = undefined;
   try {
     rawTitles = await wiki.page(title).then((page) => page.categories());
   } catch {
-    res.status(500).json(FETCH_LINKS_FAILED_ERROR);
-    return;
+    return res.status(500).json(FETCH_LINKS_FAILED_ERROR);
   }
 
   if (rawTitles === undefined) {
-    res.status(500).json(FETCH_LINKS_FAILED_ERROR);
-    return;
+    return res.status(500).json(FETCH_LINKS_FAILED_ERROR);
   }
 
   const titles = rawTitles
     .map((title) => title.split(SPLIT_BY)[1])
     .filter(Boolean);
 
-  res.json(titles.map(makeCategoryResponse).sort(makeSortFnBy('title')));
+  return res.json(titles.map(makeCategoryResponse).sort(makeSortFnBy('title')));
 };

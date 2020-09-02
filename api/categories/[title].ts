@@ -54,8 +54,9 @@ export default (request: NowRequest, response: NowResponse) => {
   const title = stringify(request.query.title);
 
   if (!title) {
-    response.status(404).json(Error('NOT_FOUND', STATUS_CODES[404] ?? ''));
-    return;
+    return response
+      .status(404)
+      .json(Error('NOT_FOUND', STATUS_CODES[404] ?? ''));
   }
 
   const params: Record<string, string> = {
@@ -68,10 +69,10 @@ export default (request: NowRequest, response: NowResponse) => {
 
   preparePages(params)
     .then((pageResponses) => {
-      response.json(pageResponses.sort(makeSortFnBy('title')));
+      return response.json(pageResponses.sort(makeSortFnBy('title')));
     })
     .catch(() => {
-      response
+      return response
         .status(500)
         .json(
           Error(
