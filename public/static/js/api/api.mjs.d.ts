@@ -18,6 +18,12 @@ interface IFavorite {
   title: string;
 }
 
+interface IInvite {
+  id: string;
+  uuid: string;
+  invitingUserId: string;
+}
+
 interface IApi {
   getCategories: () => Promise<Array<ICategory>>;
   getCategoriesByPage: (title: string) => Promise<Array<ICategory>>;
@@ -32,6 +38,8 @@ interface IApi {
   isFavorite: (title: string) => Promise<IFavorite>;
   addToFavorites: (title: string) => Promise<void>;
   removeFromFavorites: (title: string) => Promise<void>;
+  invite: () => Promise<void>;
+  getMyInvites: () => Promise<Array<IInvite>>;
 }
 
 export function useApi(): IApi;

@@ -1,6 +1,6 @@
 import Preact, { html } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
-import { Header } from '../components/header.mjs';
+import { Header } from '../components/header/header.mjs';
 import { Container } from '../components/container.mjs';
 import { Jumbotron } from '../components/jumbotron.mjs';
 

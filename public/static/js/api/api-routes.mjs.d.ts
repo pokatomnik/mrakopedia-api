@@ -14,3 +14,5 @@ export function apiLogin(): string;
 export function apiFavorite(title: string): string;
 export function apiAllFavorites(): string;
 export function apiIsFavorite(title: string): string;
+export function apiInvite(): string;
+export function apiMyInvites(): string;
