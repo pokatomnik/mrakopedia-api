@@ -1,5 +1,4 @@
 import Mongoose from 'mongoose';
-import { v4 as uuidv4 } from 'uuid';
 import { InviteModel } from '../../db/models/Invite';
 import { ensureToken } from '../../auth';
 import * as InviteErrors from './errors';
@@ -14,9 +13,8 @@ export const invite = ensureToken(async (request, response, tokenParams) => {
   }
 
   try {
-    const newInvintation = await InviteModel().create({
+    const newInvintation = await InviteModel().model.create({
       invitingUserId: Mongoose.Types.ObjectId(tokenParams.id),
-      uuid: uuidv4(),
     });
     const result = newInvintation.toObject();
     return response.json(result);

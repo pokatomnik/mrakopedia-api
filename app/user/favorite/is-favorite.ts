@@ -15,7 +15,7 @@ export const isFavorite = ensureToken(
       return response.status(400).json(FavoriteErrors.NO_PAGE_ERROR);
     }
 
-    const favoriteModel = FavoriteModel();
+    const favoriteModel = FavoriteModel().model;
     const favorite = stringify(favoriteRaw);
     const userId = Mongoose.Types.ObjectId(tokenParams.id);
     const query = {
@@ -24,9 +24,9 @@ export const isFavorite = ensureToken(
     };
 
     try {
-      const favoritesFound = await favoriteModel.find(query);
+      const favoritesFound = await favoriteModel.findOne(query);
       const respondWith: IFavoriteFound = {
-        isFavorite: Boolean(favoritesFound.length),
+        isFavorite: Boolean(favoritesFound),
         title: favorite,
       };
       return response.json(respondWith);

@@ -8,7 +8,7 @@ import { ensureToken } from '../../auth';
 
 export const myInvites = ensureToken(async (_, response, tokenParams) => {
   try {
-    const invites = await InviteModel().find({
+    const invites = await InviteModel().model.find({
       invitingUserId: Mongoose.Types.ObjectId(tokenParams.id),
     });
     const result = invites.map((invite) => invite.toObject());

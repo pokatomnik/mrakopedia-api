@@ -30,5 +30,8 @@ const FavoriteSchema = new Schema(
 
 FavoriteSchema.index({ title: 1, userId: 1 }, { unique: true });
 
-export const FavoriteModel = () =>
-  connect().model<IFavorite>('favorite', FavoriteSchema);
+export const FavoriteModel = () => {
+  const db = connect();
+  const model = db.model<IFavorite>('favorite', FavoriteSchema);
+  return { db, model };
+};

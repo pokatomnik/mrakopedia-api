@@ -10,7 +10,7 @@ const INVITES_REQUEST_FAILED =
   'Загрузка приглашений завершилась ошибкой, попробуйте позднее.';
 const LOADING_MESSAGE = 'Загрузка приглашений';
 
-const InviteItem = ({ uuid, id, onRemoveClick }) => {
+const InviteItem = ({ id, onRemoveClick }) => {
   const inputRef = Hooks.useRef(null);
   const handleFocus = Hooks.useCallback(() => {
     if (inputRef.current) {
@@ -32,7 +32,7 @@ const InviteItem = ({ uuid, id, onRemoveClick }) => {
         readonly
         type="text"
         aria-label="Название истории..."
-        value=${`${window.location.origin}/#/register/${uuid}`}
+        value=${`${window.location.origin}/#/register/${id}`}
       />
       <div className="input-group-append">
         <button
@@ -176,12 +176,8 @@ export const InvitesList = () => {
         items=${invites}
         defaultName="Поделитесь одной из ссылок ниже"
       >
-        ${({ uuid, id }) =>
-          html`<${InviteItem}
-            uuid=${uuid}
-            id=${id}
-            onRemoveClick=${handleRemoveClick}
-          />`}
+        ${({ id }) =>
+          html`<${InviteItem} id=${id} onRemoveClick=${handleRemoveClick} />`}
       </${ListView}>
     </${Preact.Fragment}>
   `;
