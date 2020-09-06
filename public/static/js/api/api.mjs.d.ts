@@ -38,7 +38,7 @@ interface IApi {
   isFavorite: (title: string) => Promise<IFavorite>;
   addToFavorites: (title: string) => Promise<void>;
   removeFromFavorites: (title: string) => Promise<void>;
-  invite: () => Promise<void>;
+  invite: () => Promise<IInvite>;
   getMyInvites: () => Promise<Array<IInvite>>;
 }
 

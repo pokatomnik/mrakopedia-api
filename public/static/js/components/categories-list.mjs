@@ -53,7 +53,7 @@ export const CategoriesList = ({ fetchCategories, groupBy }) => {
           setNoResults(false);
         })
       );
-  }, [ifMounted]);
+  }, [ifMounted, fetchCategories]);
 
   if (isLoading) {
     return html`

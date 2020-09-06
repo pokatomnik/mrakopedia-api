@@ -1,7 +1,11 @@
 import { Hooks, html } from '../../preact/preact.mjs';
-import { RouteIndex, RouteLogin } from '../../routes.mjs';
+import { RouteIndex, RouteLogin, RouteMyInvites } from '../../routes.mjs';
 import { useAuth } from '../../utils/auth/auth.mjs';
 import { useRouteData } from '../../utils/router/route-component.mjs';
+
+const getMenuItemClass = (disabled) => {
+  return 'dropdown-item'.concat(disabled ? ' disabled' : '');
+};
 
 export const UserItems = () => {
   const { user, logout } = useAuth();
@@ -10,6 +14,7 @@ export const UserItems = () => {
   const handleLogout = Hooks.useCallback(
     (evt) => {
       evt.preventDefault();
+      evt.stopPropagation();
       if (!user) {
         return;
       }
@@ -24,6 +29,7 @@ export const UserItems = () => {
   const handleLogin = Hooks.useCallback(
     (evt) => {
       evt.preventDefault();
+      evt.stopPropagation();
       if (user) {
         return;
       }
@@ -32,13 +38,18 @@ export const UserItems = () => {
     [user]
   );
 
-  const navMenuItemClass = 'dropdown-item';
-  const loginMenuItemClasses = user
-    ? `${navMenuItemClass} disabled`
-    : navMenuItemClass;
-  const logoutMenuItemClasses = user
-    ? navMenuItemClass
-    : `${navMenuItemClass} disabled`;
+  const goToMyInvites = Hooks.useCallback(() => {
+    push(RouteMyInvites.link());
+  }, [push]);
+
+  const handleMyInvites = Hooks.useCallback(
+    (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      goToMyInvites();
+    },
+    [push, goToMyInvites]
+  );
 
   return html`
     <li className="nav-item dropdown">
@@ -54,15 +65,29 @@ export const UserItems = () => {
       </a>
       <div className="dropdown-menu" aria-labelledby="user-dropdown">
         <a
-          className=${loginMenuItemClasses}
+          className=${getMenuItemClass(!user)}
           href=${`/#${RouteLogin.link()}`}
           onClick=${handleLogin}
         >
           Войти
         </a>
-        <a className=${logoutMenuItemClasses} href="#" onClick=${handleLogout}>
+        <a
+          className=${getMenuItemClass(Boolean(user))}
+          href="#"
+          onClick=${handleLogout}
+        >
           Выйти
         </a>
+        ${user &&
+        html`
+          <a
+            href=${`/#${RouteMyInvites.link()}`}
+            className=${getMenuItemClass(!user)}
+            onClick=${handleMyInvites}
+          >
+            Мои приглашения
+          </a>
+        `}
       </div>
     </li>
   `;

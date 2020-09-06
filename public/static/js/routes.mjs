@@ -9,6 +9,7 @@ import { Like } from './pages/like.mjs';
 import { CategoriesByPage } from './pages/categories-by-page.mjs';
 import { Login } from './pages/login.mjs';
 import { Favorites } from './pages/favorites.mjs';
+import { MyInvites } from './pages/my-invites.mjs';
 
 /**
  * Do not use this directly in the routes array,
@@ -103,6 +104,14 @@ export const RouteFavorites = {
   },
 };
 
+export const RouteMyInvites = {
+  url: '/my-invites',
+  Component: MyInvites,
+  link() {
+    return this.url;
+  },
+};
+
 export const routes = [
   RouteIndex,
   RoutePage,
@@ -114,4 +123,5 @@ export const routes = [
   RouteCategoriesByPage,
   RouteLogin,
   RouteFavorites,
+  RouteMyInvites,
 ];
