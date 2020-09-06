@@ -65,14 +65,14 @@ export const UserItems = () => {
       </a>
       <div className="dropdown-menu" aria-labelledby="user-dropdown">
         <a
-          className=${getMenuItemClass(!user)}
+          className=${getMenuItemClass(Boolean(user))}
           href=${`/#${RouteLogin.link()}`}
           onClick=${handleLogin}
         >
           Войти
         </a>
         <a
-          className=${getMenuItemClass(Boolean(user))}
+          className=${getMenuItemClass(!user)}
           href="#"
           onClick=${handleLogout}
         >
