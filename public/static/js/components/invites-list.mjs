@@ -10,7 +10,7 @@ const INVITES_REQUEST_FAILED =
   'Загрузка приглашений завершилась ошибкой, попробуйте позднее.';
 const LOADING_MESSAGE = 'Загрузка приглашений';
 
-const InviteItem = ({ uuid }) => {
+const InviteItem = ({ uuid, id, onRemoveClick }) => {
   const inputRef = Hooks.useRef(null);
   const handleFocus = Hooks.useCallback(() => {
     if (inputRef.current) {
@@ -18,22 +18,37 @@ const InviteItem = ({ uuid }) => {
     }
   }, []);
 
+  const handleRemoveClick = Hooks.useCallback(() => {
+    onRemoveClick(id);
+  }, [id, onRemoveClick]);
+
   // TODO: replace this hardcoded "register/" string with a route `link()` method result
   return html`
-    <input
-      onFocus=${handleFocus}
-      ref=${inputRef}
-      className="form-control mr-sm-2"
-      readonly
-      type="text"
-      aria-label="Название истории..."
-      value=${`${window.location.origin}/#/register/${uuid}`}
-    />
+    <div className="input-group mb-3">
+      <input
+        onFocus=${handleFocus}
+        ref=${inputRef}
+        className="form-control"
+        readonly
+        type="text"
+        aria-label="Название истории..."
+        value=${`${window.location.origin}/#/register/${uuid}`}
+      />
+      <div className="input-group-append">
+        <button
+          className="btn btn-danger"
+          type="button"
+          onClick=${handleRemoveClick}
+        >
+          Удалить
+        </button>
+      </div>
+    </div>
   `;
 };
 
 export const InvitesList = () => {
-  const { getMyInvites, invite } = useApi();
+  const { getMyInvites, invite, removeInviteById } = useApi();
   const ifMounted = useIfMounted();
   const [invites, setInvites] = Hooks.useState([]);
   const [error, setError] = Hooks.useState('');
@@ -88,25 +103,58 @@ export const InvitesList = () => {
     loadInvites();
   }, [loadInvites]);
 
+  const handleRemoveClick = Hooks.useCallback(
+    (id) => {
+      const oldInvites = invites;
+      const invitesFiltered = invites.filter((invite) => invite.id !== id);
+      setInvites(invitesFiltered);
+      setNoResults(!invitesFiltered.length);
+      removeInviteById(id).catch(
+        ifMounted(() => {
+          setInvites(oldInvites);
+          setNoResults(!oldInvites.length);
+          alert('Не удалось удалить приглашение, попробуйте позднее');
+        })
+      );
+    },
+    [invites]
+  );
+
+  const inviteEl = html`
+    <${Container}>
+      <a
+        href="#"
+        className=${isInviting ? 'btn-link disabled' : 'btn-link'}
+        onClick=${handleInviteClick}
+      >
+        Пригласить
+      </a>
+      ${isInviting && ' (создаем приглашение...)'}
+    </${Container} />
+  `;
+
   if (isLoading) {
     return html`
       <${Preact.Fragment}>
         <${ListView} items=${[]} defaultName=${LOADING_MESSAGE}>
           ${() => html`<${Preact.Fragment} />`}
         </${ListView}>
-        <${PreloaderContainer}>
+        <${PreloaderContainer} />
       </${Preact.Fragment}>
     `;
   }
 
   if (noResults) {
     return html`
-      <${ListView}
-        items=${[]}
-        defaultName=${NO_INVITES}
-      >
-        ${() => html`<${Preact.Fragment} />`}
-      </${ListView}>
+      <${Preact.Fragment}>
+        ${inviteEl}
+        <${ListView}
+          items=${[]}
+          defaultName=${NO_INVITES}
+        >
+          ${() => html`<${Preact.Fragment} />`}
+        </${ListView}>
+      </${Preact.Fragment}>
     `;
   }
 
@@ -123,21 +171,17 @@ export const InvitesList = () => {
 
   return html`
     <${Preact.Fragment}>
-      <${Container}>
-        <a
-          href="#"
-          className=${isInviting ? 'btn-link disabled' : 'btn-link'}
-          onClick=${handleInviteClick}
-        >
-          Пригласить
-        </a>
-        ${isInviting && ' (создаем приглашение...)'}
-      </${Container}>
+      ${inviteEl}
       <${ListView}
         items=${invites}
         defaultName="Поделитесь одной из ссылок ниже"
       >
-        ${({ uuid }) => html`<${InviteItem} uuid=${uuid}></${InviteItem}>`}
+        ${({ uuid, id }) =>
+          html`<${InviteItem}
+            uuid=${uuid}
+            id=${id}
+            onRemoveClick=${handleRemoveClick}
+          />`}
       </${ListView}>
     </${Preact.Fragment}>
   `;

@@ -40,6 +40,7 @@ interface IApi {
   removeFromFavorites: (title: string) => Promise<void>;
   invite: () => Promise<IInvite>;
   getMyInvites: () => Promise<Array<IInvite>>;
+  removeInviteById: (inviteId: string) => Promise<void>;
 }
 
 export function useApi(): IApi;
