@@ -24,9 +24,9 @@ export const isFavorite = ensureToken(
     };
 
     try {
-      const favoritesFound = await favoriteModel.find(query);
+      const favoritesFound = await favoriteModel.findOne(query);
       const respondWith: IFavoriteFound = {
-        isFavorite: Boolean(favoritesFound.length),
+        isFavorite: Boolean(favoritesFound),
         title: favorite,
       };
       return response.json(respondWith);

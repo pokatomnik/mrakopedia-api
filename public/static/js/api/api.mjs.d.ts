@@ -20,7 +20,6 @@ interface IFavorite {
 
 interface IInvite {
   id: string;
-  uuid: string;
   invitingUserId: string;
 }
 

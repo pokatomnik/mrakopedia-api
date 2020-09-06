@@ -110,7 +110,6 @@ The result will be:
 ```typescript
 interface IInvite {
   id: string;
-  uuid: string;
   invitingUserId: string;
 }
 ```
@@ -126,7 +125,6 @@ The result will be:
 ```typescript
 interface IInvite {
   id: string;
-  uuid: string;
   invitingUserId: string;
 }
 type Response = Array<IInvite>;

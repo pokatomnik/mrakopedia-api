@@ -2,6 +2,7 @@ import { NowApiHandler } from '@vercel/node';
 import { login, check } from './login';
 import { favorite, allFavorites, isFavorite } from './favorite';
 import { invite, myInvites, removeInvite } from './invite';
+import { register } from './register';
 
 export const actionMap: Record<string, NowApiHandler | undefined> = {
   login,
@@ -12,4 +13,5 @@ export const actionMap: Record<string, NowApiHandler | undefined> = {
   invite,
   'my-invites': myInvites,
   'remove-invite': removeInvite,
+  register,
 };
