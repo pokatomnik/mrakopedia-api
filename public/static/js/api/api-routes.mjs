@@ -18,3 +18,5 @@ export const apiIsFavorite = (title) =>
   `/api/user?action=is-favorite&favorite=${title}`;
 export const apiInvite = () => `/api/user?action=invite`;
 export const apiMyInvites = () => `/api/user?action=my-invites`;
+export const apiRemoveInvite = (inviteId) =>
+  `/api/user?action=remove-invite&inviteId=${inviteId}`;

@@ -13,6 +13,7 @@ import {
   apiIsFavorite,
   apiInvite,
   apiMyInvites,
+  apiRemoveInvite,
 } from './api-routes.mjs';
 import { ApiCall } from './fetch.mjs';
 import { useAuth } from '../utils/auth/auth.mjs';
@@ -89,6 +90,11 @@ export const useApi = () => {
     [getToken]
   );
 
+  const removeInviteById = Hooks.useCallback(
+    (inviteId) => ApiCall(getToken()).delete(apiRemoveInvite(inviteId)),
+    [getToken]
+  );
+
   return {
     getCategories,
     getCategoriesByPage,
@@ -105,5 +111,6 @@ export const useApi = () => {
     removeFromFavorites,
     invite,
     getMyInvites,
+    removeInviteById,
   };
 };
