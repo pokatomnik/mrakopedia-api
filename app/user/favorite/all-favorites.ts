@@ -6,7 +6,7 @@ import { ensureToken } from '../../auth';
 
 export const allFavorites = ensureToken(async (_, response, tokenParams) => {
   try {
-    const result = await FavoriteModel().find({
+    const result = await FavoriteModel().model.find({
       userId: Mongoose.Types.ObjectId(tokenParams.id),
     });
     const responseItems = result.map((item) =>

@@ -24,7 +24,7 @@ export const removeInvite = ensureToken(
     }
 
     try {
-      await InviteModel().findOneAndDelete({
+      await InviteModel().model.findOneAndDelete({
         invitingUserId: Mongoose.Types.ObjectId(tokenData.id),
         _id: Mongoose.Types.ObjectId(inviteId),
       });

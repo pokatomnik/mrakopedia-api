@@ -14,7 +14,7 @@ export const invite = ensureToken(async (request, response, tokenParams) => {
   }
 
   try {
-    const newInvintation = await InviteModel().create({
+    const newInvintation = await InviteModel().model.create({
       invitingUserId: Mongoose.Types.ObjectId(tokenParams.id),
       uuid: uuidv4(),
     });

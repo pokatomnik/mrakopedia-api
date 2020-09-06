@@ -15,7 +15,7 @@ export const isFavorite = ensureToken(
       return response.status(400).json(FavoriteErrors.NO_PAGE_ERROR);
     }
 
-    const favoriteModel = FavoriteModel();
+    const favoriteModel = FavoriteModel().model;
     const favorite = stringify(favoriteRaw);
     const userId = Mongoose.Types.ObjectId(tokenParams.id);
     const query = {

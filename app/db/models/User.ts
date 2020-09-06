@@ -25,5 +25,8 @@ const UserSchema = new Schema({
   },
 });
 
-export const UserModel = () =>
-  connect().model<IUserDocument>('user', UserSchema);
+export const UserModel = () => {
+  const db = connect();
+  const model = db.model<IUserDocument>('user', UserSchema);
+  return { db, model };
+};

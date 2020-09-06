@@ -33,5 +33,8 @@ const InviteSchema = new Schema(
   }
 );
 
-export const InviteModel = () =>
-  connect().model<IInvite>('invite', InviteSchema);
+export const InviteModel = () => {
+  const db = connect();
+  const model = db.model<IInvite>('invite', InviteSchema);
+  return { db, model };
+};
