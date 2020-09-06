@@ -1,6 +1,7 @@
 import Preact, { html, Hooks } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
-import { Header, NavLink } from '../components/header.mjs';
+import { Header } from '../components/header/header.mjs';
+import { NavLink } from '../components/header/nav-link.mjs';
 import { PageContents } from '../components/page-contents.mjs';
 import { RouteLike, RouteCategoriesByPage } from '../routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';

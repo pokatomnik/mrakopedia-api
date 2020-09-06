@@ -16,3 +16,5 @@ export const apiFavorite = (title) =>
 export const apiAllFavorites = () => `/api/user?action=all-favorites`;
 export const apiIsFavorite = (title) =>
   `/api/user?action=is-favorite&favorite=${title}`;
+export const apiInvite = () => `/api/user?action=invite`;
+export const apiMyInvites = () => `/api/user?action=my-invites`;

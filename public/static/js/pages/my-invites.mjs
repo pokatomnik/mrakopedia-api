@@ -2,19 +2,17 @@ import Preact, { html } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
 import { Header } from '../components/header/header.mjs';
 import { Container } from '../components/container.mjs';
-import { Jumbotron } from '../components/jumbotron.mjs';
+import { InvitesList } from '../components/invites-list.mjs';
 
-export const Fallback = () => {
+export const MyInvites = () => {
   return html`
     <${Preact.Fragment}>
     <${Header} />
     <${Main}>
-      <${Jumbotron}>
-        <${Container}>
-          <h1>404</h1>
-          <p>Страница не найдена.</p>
-        </${Container}>
-      </${Jumbotron}>
+      <${Container}>
+        <h1 className="mt-5">Мои приглашения</h1>
+      </${Container}>
+      <${InvitesList} />
     </${Main}>
     </${Preact.Fragment}>
   `;

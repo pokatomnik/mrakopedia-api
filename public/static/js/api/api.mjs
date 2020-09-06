@@ -11,6 +11,8 @@ import {
   apiAllFavorites,
   apiFavorite,
   apiIsFavorite,
+  apiInvite,
+  apiMyInvites,
 } from './api-routes.mjs';
 import { ApiCall } from './fetch.mjs';
 import { useAuth } from '../utils/auth/auth.mjs';
@@ -77,6 +79,16 @@ export const useApi = () => {
     [getToken]
   );
 
+  const invite = Hooks.useCallback(
+    () => ApiCall(getToken()).post(apiInvite(), {}),
+    [getToken]
+  );
+
+  const getMyInvites = Hooks.useCallback(
+    () => ApiCall(getToken()).get(apiMyInvites()),
+    [getToken]
+  );
+
   return {
     getCategories,
     getCategoriesByPage,
@@ -91,5 +103,7 @@ export const useApi = () => {
     isFavorite,
     addToFavorites,
     removeFromFavorites,
+    invite,
+    getMyInvites,
   };
 };

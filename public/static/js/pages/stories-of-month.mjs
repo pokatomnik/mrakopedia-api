@@ -1,6 +1,6 @@
 import Preact, { html, Hooks } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
-import { Header } from '../components/header.mjs';
+import { Header } from '../components/header/header.mjs';
 import { PageResults } from '../components/page-results.mjs';
 import { useApi } from '../api/api.mjs';
 import { groupByFirstLetter } from '../utils/group-by-first-letter.mjs';
