@@ -12,6 +12,11 @@ export const REGISTER_DATABASE_ERROR = Error(
   'Database error during registration'
 );
 
+export const INVITE_CHECK_ERROR = Error(
+  'INVITE_CHECK_ERROR',
+  'Unable to check invite: database error'
+);
+
 export const USER_EXISTS_ERROR = Error(
   'USER_ALREADY_EXISTS',
   'User with this email already exists'
