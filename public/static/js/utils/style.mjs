@@ -8,3 +8,7 @@ export const style = (rules) =>
       return [...acc, `${key}:${value}`];
     }, [])
     .join(';');
+
+export const EMAIL_INPUT_STYLE = style({
+  'text-transform': 'lowercase',
+});

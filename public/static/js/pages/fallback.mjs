@@ -1,7 +1,7 @@
 import Preact, { html } from '../preact/preact.mjs';
 import { Main } from '../components/main.mjs';
 import { Header } from '../components/header/header.mjs';
-import { Container } from '../components/container.mjs';
+import { NotFoundContainer } from '../components/not-found-container.mjs';
 import { Jumbotron } from '../components/jumbotron.mjs';
 
 export const Fallback = () => {
@@ -10,10 +10,9 @@ export const Fallback = () => {
     <${Header} />
     <${Main}>
       <${Jumbotron}>
-        <${Container}>
-          <h1>404</h1>
-          <p>Страница не найдена.</p>
-        </${Container}>
+        <${NotFoundContainer}>
+          Страница не найдена.
+        </${NotFoundContainer}>
       </${Jumbotron}>
     </${Main}>
     </${Preact.Fragment}>
