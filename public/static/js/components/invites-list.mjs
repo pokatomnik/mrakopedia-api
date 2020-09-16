@@ -4,6 +4,7 @@ import { PreloaderContainer } from './preloader.mjs';
 import { useIfMounted } from '../utils/if-mounted.mjs';
 import { useApi } from '../api/api.mjs';
 import { Container } from './container.mjs';
+import { RouteRegister } from '../routes.mjs';
 
 const NO_INVITES = 'Нет активных приглашений';
 const INVITES_REQUEST_FAILED =
@@ -32,7 +33,7 @@ const InviteItem = ({ id, onRemoveClick }) => {
         readonly
         type="text"
         aria-label="Название истории..."
-        value=${`${window.location.origin}/#/register/${id}`}
+        value=${`${window.location.origin}/#${RouteRegister.link(id)}`}
       />
       <div className="input-group-append">
         <button

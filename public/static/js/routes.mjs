@@ -10,6 +10,7 @@ import { CategoriesByPage } from './pages/categories-by-page.mjs';
 import { Login } from './pages/login.mjs';
 import { Favorites } from './pages/favorites.mjs';
 import { MyInvites } from './pages/my-invites.mjs';
+import { Register } from './pages/register.mjs';
 
 /**
  * Do not use this directly in the routes array,
@@ -112,6 +113,14 @@ export const RouteMyInvites = {
   },
 };
 
+export const RouteRegister = {
+  url: '/register/:inviteId',
+  Component: Register,
+  link(inviteId) {
+    return `/register/${inviteId}`;
+  },
+};
+
 export const routes = [
   RouteIndex,
   RoutePage,
@@ -124,4 +133,5 @@ export const routes = [
   RouteLogin,
   RouteFavorites,
   RouteMyInvites,
+  RouteRegister,
 ];

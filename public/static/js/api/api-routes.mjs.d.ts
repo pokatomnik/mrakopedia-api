@@ -17,3 +17,5 @@ export function apiIsFavorite(title: string): string;
 export function apiInvite(): string;
 export function apiMyInvites(): string;
 export function apiRemoveInvite(inviteId: string): string;
+export function checkInvite(inviteId: string): string;
+export function register(): string;

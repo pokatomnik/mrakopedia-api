@@ -20,3 +20,6 @@ export const apiInvite = () => `/api/user?action=invite`;
 export const apiMyInvites = () => `/api/user?action=my-invites`;
 export const apiRemoveInvite = (inviteId) =>
   `/api/user?action=remove-invite&inviteId=${inviteId}`;
+export const checkInvite = (inviteId) =>
+  `/api/user?action=invite-exists&inviteId=${inviteId}`;
+export const register = () => `/api/user?action=register`;

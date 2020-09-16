@@ -23,6 +23,11 @@ interface IInvite {
   invitingUserId: string;
 }
 
+interface IInviteExists {
+  invite: string;
+  exists: boolean;
+}
+
 interface IApi {
   getCategories: () => Promise<Array<ICategory>>;
   getCategoriesByPage: (title: string) => Promise<Array<ICategory>>;
@@ -40,6 +45,13 @@ interface IApi {
   invite: () => Promise<IInvite>;
   getMyInvites: () => Promise<Array<IInvite>>;
   removeInviteById: (inviteId: string) => Promise<void>;
+  checkInvite: (inviteId: string) => Promise<IInviteExists>;
+  register: (
+    inviteId: string,
+    userName: string,
+    email: string,
+    passwordHash: string
+  ) => Promise<void>;
 }
 
 export function useApi(): IApi;

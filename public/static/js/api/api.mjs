@@ -14,6 +14,8 @@ import {
   apiInvite,
   apiMyInvites,
   apiRemoveInvite,
+  checkInvite as checkInviteRoute,
+  register as registerRoute,
 } from './api-routes.mjs';
 import { ApiCall } from './fetch.mjs';
 import { useAuth } from '../utils/auth/auth.mjs';
@@ -95,6 +97,22 @@ export const useApi = () => {
     [getToken]
   );
 
+  const checkInvite = Hooks.useCallback(
+    (inviteId) => ApiCall().get(checkInviteRoute(inviteId)),
+    []
+  );
+
+  const register = Hooks.useCallback(
+    (inviteId, userName, email, passwordHash) =>
+      ApiCall().post(registerRoute(), {
+        inviteId,
+        userName,
+        email,
+        passwordHash,
+      }),
+    []
+  );
+
   return {
     getCategories,
     getCategoriesByPage,
@@ -112,5 +130,7 @@ export const useApi = () => {
     invite,
     getMyInvites,
     removeInviteById,
+    checkInvite,
+    register,
   };
 };
