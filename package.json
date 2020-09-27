@@ -17,8 +17,6 @@
   "author": "Danilian Akhmedzianov <hugefast@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/jsonwebtoken": "^8.5.0",
-    "@types/mongoose": "^5.7.36",
     "@types/node": "^14.0.22",
     "@vercel/node": "^1.8.0",
     "preact": "^10.4.7",
@@ -27,8 +25,6 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.0",
     "vercel": "^20.0.0",
     "wikijs": "^6.0.1"
   }

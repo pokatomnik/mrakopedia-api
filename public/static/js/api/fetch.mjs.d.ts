@@ -4,4 +4,4 @@ interface IApiCall {
   delete: <T>(url: string) => Promise<T>;
 }
 
-export function ApiCall(token?: string): IApiCall;
+export function ApiCall(): IApiCall;
