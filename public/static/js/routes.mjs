@@ -7,10 +7,6 @@ import { PagesByCategory } from './pages/pages-by-category.mjs';
 import { StoriesOfMonth } from './pages/stories-of-month.mjs';
 import { Like } from './pages/like.mjs';
 import { CategoriesByPage } from './pages/categories-by-page.mjs';
-import { Login } from './pages/login.mjs';
-import { Favorites } from './pages/favorites.mjs';
-import { MyInvites } from './pages/my-invites.mjs';
-import { Register } from './pages/register.mjs';
 
 /**
  * Do not use this directly in the routes array,
@@ -89,38 +85,6 @@ export const RouteCategoriesByPage = {
   },
 };
 
-export const RouteLogin = {
-  url: '/login',
-  Component: Login,
-  link() {
-    return this.url;
-  },
-};
-
-export const RouteFavorites = {
-  url: '/favorites',
-  Component: Favorites,
-  link() {
-    return this.url;
-  },
-};
-
-export const RouteMyInvites = {
-  url: '/my-invites',
-  Component: MyInvites,
-  link() {
-    return this.url;
-  },
-};
-
-export const RouteRegister = {
-  url: '/register/:inviteId',
-  Component: Register,
-  link(inviteId) {
-    return `/register/${inviteId}`;
-  },
-};
-
 export const routes = [
   RouteIndex,
   RoutePage,
@@ -130,8 +94,4 @@ export const routes = [
   RouteStoriesOfMonth,
   RouteLike,
   RouteCategoriesByPage,
-  RouteLogin,
-  RouteFavorites,
-  RouteMyInvites,
-  RouteRegister,
 ];

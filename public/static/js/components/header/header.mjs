@@ -1,26 +1,22 @@
-import Preact, { html, Hooks } from '../../preact/preact.mjs';
+import { html, Hooks } from '../../preact/preact.mjs';
 import {
   RouteIndex,
   RouteCategories,
   RouteStoriesOfMonth,
-  RouteFavorites,
   RoutePage,
   RouteFallback,
 } from '../../routes.mjs';
 import { useRouteData } from '../../utils/router/route-component.mjs';
-import { useAuth } from '../../utils/auth/auth.mjs';
 import { useIfMounted } from '../../utils/if-mounted.mjs';
 import { useApi } from '../../api/api.mjs';
 import { SearchForm } from './search-form.mjs';
 import { NavLink } from './nav-link.mjs';
-import { UserItems } from './user-items.mjs';
 
 const COLLAPSE_ID = 'navbarCollapse';
 
 export const Header = ({ children }) => {
   const ifMounted = useIfMounted();
   const { push } = useRouteData();
-  const { user } = useAuth();
   const { getRandom } = useApi();
 
   const handlePushIndex = Hooks.useCallback(
@@ -51,12 +47,6 @@ export const Header = ({ children }) => {
     [getRandom, push, ifMounted]
   );
 
-  const favoritesLink = user
-    ? html`<${NavLink} link=${RouteFavorites.link()}>
-      Избранное
-    </${NavLink}>`
-    : html`<${Preact.Fragment} />`;
-
   return html`
     <header>
       <nav className="navbar navbar-dark bg-dark">
@@ -65,7 +55,7 @@ export const Header = ({ children }) => {
           href=${`/#${RouteIndex.link()}`}
           onClick=${handlePushIndex}
         >
-          ${user ? user.userName : 'MrakopediaReader'}
+          MrakopediaReader
         </a>
         <button
           className="navbar-toggler collapsed"
@@ -80,7 +70,6 @@ export const Header = ({ children }) => {
         </button>
         <div className="navbar-collapse collapse" id="${COLLAPSE_ID}">
           <ul className="navbar-nav mr-auto">
-            <${UserItems} />
             <li className="nav-item">
               <a className="nav-link" href="#" onClick=${handleRandomClick}>
                 Случайная страница
@@ -92,7 +81,6 @@ export const Header = ({ children }) => {
             <${NavLink} link=${RouteStoriesOfMonth.link()}>
               Истории месяца
             </${NavLink}>
-            ${favoritesLink}
             ${children}
           </ul>
           <${SearchForm} />

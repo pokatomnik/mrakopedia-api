@@ -6,131 +6,7 @@ The website's engine ([MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)) pro
 
 The goal of this project is to provide a simple API for the [Mrakopedia Reader](https://github.com/pokatomnik/mrakopedia-reader) using Vercel's web [framework](https://vercel.com/).
 
-## User-related methods:
-
-### Login
-
-```
-POST /api/user?action=login
-```
-
-Body data should be:
-
-```typescript
-interface ILoginParams {
-  email: string; // user email
-  passwordHash: string; // md5 password hash
-}
-```
-
-Response will be the error or the object containing success flag:
-
-```typescript
-interface ILoginSuccess {
-  /**
-   * JWT token, assign all further user-related request with It.
-   * Place this token to a header named `x-token`
-   */
-  token: string;
-}
-```
-
-### Check if token is valid:
-
-```
-GET /api/user?action=check
-```
-
-Place token to the header by key `x-token`. The result will be:
-
-```typescript
-interface ICheckResult {
-  /**
-   * Token state. `true` if valid and `false` otherwise
-   */
-  valid: boolean;
-  /**
-   * If `valid` is `false`, the description will be here. Or `undefined` if the token provided is valid
-   */
-  description?: string;
-}
-```
-
-### Add page to favorites:
-
-```
-POST /api/user?action=favorite&favorite=PAGE_TITLE
-```
-
-### Remove pages from favorites:
-
-```
-DELETE /api/user?action=favorite&favorite=PAGE_TITLE
-```
-
-### Check if the page is in favorites:
-
-```
-GET /api/user?action=is-favorite&favorite=PAGE_TITLE
-```
-
-The result will be:
-
-```typescript
-interface IFavoriteFound {
-  isFavorite: boolean;
-  title: string;
-}
-```
-
-### Get all user favorites:
-
-```
-GET /api/user?action=all-favorites
-```
-
-The result will be:
-
-```typescript
-interface IPage {
-  title: string;
-  url: string;
-}
-type Response = Array<IPage>;
-```
-
-### Invite user:
-
-```
-POST /api/user?action=invite
-```
-
-The result will be:
-
-```typescript
-interface IInvite {
-  id: string;
-  invitingUserId: string;
-}
-```
-
-### Show my invites:
-
-```
-GET /api/user?action=my-invites
-```
-
-The result will be:
-
-```typescript
-interface IInvite {
-  id: string;
-  invitingUserId: string;
-}
-type Response = Array<IInvite>;
-```
-
-## Unprotected URLS are:
+## API URLs are:
 
 ### Search
 
@@ -292,4 +168,10 @@ npm run deploy:dev
 
 ```
 npm run deploy:prod
+```
+
+## Checking Typescript files
+
+```
+npm run tscheck
 ```

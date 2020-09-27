@@ -1,5 +1,3 @@
-import { TOKEN_KEY } from '../utils/auth/auth.mjs';
-
 const handleResponse = async (response) => {
   const ok = response.ok;
   const result = await response.json();
@@ -9,12 +7,9 @@ const handleResponse = async (response) => {
   throw result;
 };
 
-export const ApiCall = (token) => {
-  const headers = token ? { [TOKEN_KEY]: token } : {};
-
+export const ApiCall = () => {
   const withoutBody = (method) => async (url) => {
     const response = await fetch(url, {
-      headers,
       method,
       cache: 'no-cache',
       credentials: 'omit',
@@ -32,7 +27,6 @@ export const ApiCall = (token) => {
       new URLSearchParams()
     );
     const response = await fetch(url, {
-      headers,
       method,
       cache: 'no-cache',
       credentials: 'omit',

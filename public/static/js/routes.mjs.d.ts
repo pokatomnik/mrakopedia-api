@@ -17,10 +17,6 @@ export const RoutePagesByCategory: IRouteObject<string>;
 export const RouteStoriesOfMonth: IRouteObject<void>;
 export const RouteLike: IRouteObject<string>;
 export const RouteCategoriesByPage: IRouteObject<string>;
-export const RouteLogin: IRouteObject<void>;
-export const RouteFavorites: IRouteObject<void>;
-export const RouteMyInvites: IRouteObject<void>;
-export const RouteRegister: IRouteObject<string>;
 export const routes = [
   RouteIndex,
   RoutePage,
@@ -30,8 +26,4 @@ export const routes = [
   RouteStoriesOfMonth,
   RouteLike,
   RouteCategoriesByPage,
-  RouteLogin,
-  RouteFavorites,
-  RouteMyInvites,
-  RouteRegister,
 ] as const;
