@@ -36,7 +36,6 @@ export const getRelatedPagesOfPage = async (
   } catch {
     links = [];
   }
-  console.log(links);
 
   return res.json(links.map(makePageResponse).sort(makeSortFnBy('title')));
 };
