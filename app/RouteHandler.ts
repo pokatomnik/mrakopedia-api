@@ -1,5 +1,6 @@
 import { NowApiHandler, NowRequest, NowResponse } from '@vercel/node';
 import { Error } from './utils';
+import identity from 'lodash/identity';
 
 export class RouteHandler {
   private readonly methods = new Map<string, NowApiHandler>();
@@ -26,8 +27,10 @@ export class RouteHandler {
     );
   }
 
-  public getHandler(): NowApiHandler {
-    return (request, response) => {
+  public getHandler(
+    middleware: (handler: NowApiHandler) => NowApiHandler = identity
+  ): NowApiHandler {
+    return middleware((request, response) => {
       const method = request.method;
       if (!method) {
         return this.handleDefault(request, response);
@@ -39,6 +42,6 @@ export class RouteHandler {
       }
 
       return handler(request, response);
-    };
+    });
   }
 }
