@@ -1,6 +1,7 @@
 import { RouteHandler } from '../app/RouteHandler';
 import { getAllCategories } from '../app/controllers';
+import { withCors } from '../app/api-middleware';
 
 export default new RouteHandler()
   .handleMethod('GET', getAllCategories)
-  .getHandler();
+  .getHandler(withCors);
