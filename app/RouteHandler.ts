@@ -28,9 +28,9 @@ export class RouteHandler {
   }
 
   public getHandler(
-    middleware: (handler: NowApiHandler) => NowApiHandler = identity
+    ...middlewares: Array<(handler: NowApiHandler) => NowApiHandler>
   ): NowApiHandler {
-    return middleware((request, response) => {
+    const handler: NowApiHandler = (request, response) => {
       const method = request.method;
       if (!method) {
         return this.handleDefault(request, response);
@@ -42,6 +42,10 @@ export class RouteHandler {
       }
 
       return handler(request, response);
-    });
+    };
+
+    return middlewares.reduce((currentHandler, currentMiddleware) => {
+      return currentMiddleware(currentHandler);
+    }, handler);
   }
 }
