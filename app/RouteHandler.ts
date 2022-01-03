@@ -1,6 +1,5 @@
 import { NowApiHandler, NowRequest, NowResponse } from '@vercel/node';
 import { Error } from './utils';
-import identity from 'lodash/identity';
 
 export class RouteHandler {
   private readonly methods = new Map<string, NowApiHandler>();
