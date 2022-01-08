@@ -8,3 +8,4 @@ export * from './get.page.title.related';
 export * from './get.page.title.source';
 export * from './get.random';
 export * from './get.search.query';
+export * from './get.configuration';
