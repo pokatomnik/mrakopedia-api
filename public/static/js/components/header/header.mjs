@@ -7,7 +7,6 @@ import {
   RouteFallback,
 } from '../../routes.mjs';
 import { useRouteData } from '../../utils/router/route-component.mjs';
-import { useIfMounted } from '../../utils/if-mounted.mjs';
 import { useApi } from '../../api/api.mjs';
 import { SearchForm } from './search-form.mjs';
 import { NavLink } from './nav-link.mjs';
@@ -15,7 +14,6 @@ import { NavLink } from './nav-link.mjs';
 const COLLAPSE_ID = 'navbarCollapse';
 
 export const Header = ({ children }) => {
-  const ifMounted = useIfMounted();
   const { push } = useRouteData();
   const { getRandom } = useApi();
 
@@ -33,18 +31,14 @@ export const Header = ({ children }) => {
       evt.preventDefault();
       evt.stopPropagation();
       getRandom()
-        .then(
-          ifMounted(({ title }) => {
-            push(RoutePage.link(title));
-          })
-        )
-        .catch(
-          ifMounted(() => {
-            push(RouteFallback.link());
-          })
-        );
+        .then(({ title }) => {
+          push(RoutePage.link(title));
+        })
+        .catch(() => {
+          push(RouteFallback.link());
+        });
     },
-    [getRandom, push, ifMounted]
+    [getRandom, push]
   );
 
   return html`

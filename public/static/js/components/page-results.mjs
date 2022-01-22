@@ -3,7 +3,6 @@ import { useRouteData } from '../utils/router/route-component.mjs';
 import { ListView } from './list-view.mjs';
 import { RoutePage } from '../routes.mjs';
 import { PreloaderContainer } from './preloader.mjs';
-import { useIfMounted } from '../utils/if-mounted.mjs';
 
 const SEARCH_ERROR =
   'Поиск завершился ошибкой, попробуйте позднее или поменяйте строку поиска';
@@ -24,7 +23,6 @@ const PageResultItem = ({ title }) => {
 };
 
 export const PageResults = ({ fetchPages, groupBy }) => {
-  const ifMounted = useIfMounted();
   const [searchResults, setSearchResults] = Hooks.useState([]);
   const [error, setError] = Hooks.useState('');
   const [noResults, setNoResults] = Hooks.useState(false);
@@ -36,21 +34,17 @@ export const PageResults = ({ fetchPages, groupBy }) => {
     setNoResults(false);
 
     fetchPages()
-      .then(
-        ifMounted((res) => {
-          setSearchResults(res);
-          setIsLoading(false);
-          setNoResults(res.length === 0);
-        })
-      )
-      .catch(
-        ifMounted(() => {
-          setError(SEARCH_ERROR);
-          setIsLoading(false);
-          setNoResults(false);
-        })
-      );
-  }, [fetchPages, ifMounted]);
+      .then((res) => {
+        setSearchResults(res);
+        setIsLoading(false);
+        setNoResults(res.length === 0);
+      })
+      .catch(() => {
+        setError(SEARCH_ERROR);
+        setIsLoading(false);
+        setNoResults(false);
+      });
+  }, [fetchPages]);
 
   if (isLoading) {
     return html`

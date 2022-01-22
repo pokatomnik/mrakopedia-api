@@ -1,3 +1,7 @@
+const isAbortError = (error) => {
+  return error && error.name === 'AbortError';
+};
+
 const handleResponse = async (response) => {
   const ok = response.ok;
   const result = await response.json();
@@ -7,15 +11,27 @@ const handleResponse = async (response) => {
   throw result;
 };
 
-export const ApiCall = () => {
+const neverResolve = () => {
+  return new Promise(() => {});
+};
+
+export const ApiCall = (abortController) => {
   const withoutBody = (method) => async (url) => {
-    const response = await fetch(url, {
-      method,
-      cache: 'no-cache',
-      credentials: 'omit',
-      redirect: 'follow',
-    });
-    return handleResponse(response);
+    try {
+      const response = await fetch(url, {
+        method,
+        cache: 'no-cache',
+        credentials: 'omit',
+        redirect: 'follow',
+        signal: abortController.signal,
+      });
+      return handleResponse(response);
+    } catch (error) {
+      if (isAbortError(error)) {
+        return neverResolve();
+      }
+      throw error;
+    }
   };
 
   const withBody = (method) => async (url, params) => {
@@ -26,14 +42,22 @@ export const ApiCall = () => {
       },
       new URLSearchParams()
     );
-    const response = await fetch(url, {
-      method,
-      cache: 'no-cache',
-      credentials: 'omit',
-      redirect: 'follow',
-      body: urlSearchParams,
-    });
-    return handleResponse(response);
+    try {
+      const response = await fetch(url, {
+        method,
+        cache: 'no-cache',
+        credentials: 'omit',
+        redirect: 'follow',
+        body: urlSearchParams,
+        signal: abortController.signal,
+      });
+      return handleResponse(response);
+    } catch (error) {
+      if (isAbortError(error)) {
+        return neverResolve();
+      }
+      throw error;
+    }
   };
 
   return {

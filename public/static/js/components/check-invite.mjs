@@ -1,5 +1,4 @@
 import Preact, { Hooks, html } from '../preact/preact.mjs';
-import { useIfMounted } from '../utils/if-mounted.mjs';
 import { useApi } from '../api/api.mjs';
 import { PreloaderContainer } from './preloader.mjs';
 import { NotFoundContainer } from './not-found-container.mjs';
@@ -11,7 +10,6 @@ const preloaderContainerStyle = style({
 });
 
 const useInviteCheck = (inviteId) => {
-  const ifMounted = useIfMounted();
   const [isChecking, setIsChecking] = Hooks.useState(false);
   const [exists, setExists] = Hooks.useState(undefined);
   const { checkInvite } = useApi();
@@ -19,18 +17,14 @@ const useInviteCheck = (inviteId) => {
     setIsChecking(true);
     setExists(undefined);
     checkInvite(inviteId)
-      .then(
-        ifMounted(({ exists }) => {
-          setExists(exists);
-          setIsChecking(false);
-        })
-      )
-      .catch(
-        ifMounted(() => {
-          setExists(false);
-          setIsChecking(false);
-        })
-      );
+      .then(({ exists }) => {
+        setExists(exists);
+        setIsChecking(false);
+      })
+      .catch(() => {
+        setExists(false);
+        setIsChecking(false);
+      });
   }, [inviteId]);
   return { isChecking, exists };
 };
