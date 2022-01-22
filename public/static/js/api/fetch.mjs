@@ -1,3 +1,7 @@
+const isAbortError = (error) => {
+  return error && error.name === 'AbortError';
+};
+
 const handleResponse = async (response) => {
   const ok = response.ok;
   const result = await response.json();
@@ -5,6 +9,10 @@ const handleResponse = async (response) => {
     return result;
   }
   throw result;
+};
+
+const neverResolve = () => {
+  return new Promise(() => {});
 };
 
 export const ApiCall = (abortController) => {
@@ -19,8 +27,8 @@ export const ApiCall = (abortController) => {
       });
       return handleResponse(response);
     } catch (error) {
-      if (error.name === 'AbortError') {
-        return new Promise(() => {});
+      if (isAbortError(error)) {
+        return neverResolve();
       }
       throw error;
     }
@@ -45,8 +53,8 @@ export const ApiCall = (abortController) => {
       });
       return handleResponse(response);
     } catch (error) {
-      if (error.name === 'AbortError') {
-        return new Promise(() => {});
+      if (isAbortError(error)) {
+        return neverResolve();
       }
       throw error;
     }
