@@ -6,23 +6,19 @@ import { PageContents } from '../components/page-contents.mjs';
 import { RouteLike, RouteCategoriesByPage } from '../routes.mjs';
 import { useRouteData } from '../utils/router/route-component.mjs';
 import { useApi } from '../api/api.mjs';
-import { useIfMounted } from '../utils/if-mounted.mjs';
 
 const useMrakopediaUrl = () => {
   const {
     params: { title },
   } = useRouteData();
   const { getSourceUrl } = useApi();
-  const ifMounted = useIfMounted();
   const [mrakopediaUrl, setMrakopediaUrl] = Hooks.useState(null);
 
   Hooks.useEffect(() => {
-    getSourceUrl(title).then(
-      ifMounted(({ url }) => {
-        setMrakopediaUrl(url);
-      })
-    );
-  }, [title, getSourceUrl, ifMounted]);
+    getSourceUrl(title).then(({ url }) => {
+      setMrakopediaUrl(url);
+    });
+  }, [title, getSourceUrl]);
 
   return mrakopediaUrl;
 };
