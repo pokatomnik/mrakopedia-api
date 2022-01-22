@@ -4,4 +4,4 @@ interface IApiCall {
   delete: <T>(url: string) => Promise<T>;
 }
 
-export function ApiCall(): IApiCall;
+export function ApiCall(abortController: AbortController): IApiCall;

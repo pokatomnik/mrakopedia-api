@@ -13,41 +13,54 @@ import { ApiCall } from './fetch.mjs';
 import { Hooks } from '../preact/preact.mjs';
 
 export const useApi = () => {
+  const abortController = Hooks.useMemo(() => {
+    return new AbortController();
+  }, []);
+
   const getCategories = Hooks.useCallback(
-    () => ApiCall().get(apiCategories()),
-    []
+    () => ApiCall(abortController).get(apiCategories()),
+    [abortController]
   );
   const getCategoriesByPage = Hooks.useCallback(
-    (title) => ApiCall().get(apiCategoriesByPage(title)),
-    []
+    (title) => ApiCall(abortController).get(apiCategoriesByPage(title)),
+    [abortController]
   );
   const getPage = Hooks.useCallback(
-    (title) => ApiCall().get(apiPage(title)),
-    []
+    (title) => ApiCall(abortController).get(apiPage(title)),
+    [abortController]
   );
   const getPagesByCategory = Hooks.useCallback(
-    (title) => ApiCall().get(apiPagesByCategory(title)),
-    []
+    (title) => ApiCall(abortController).get(apiPagesByCategory(title)),
+    [abortController]
   );
   const getRelated = Hooks.useCallback(
-    (title) => ApiCall().get(apiRelated(title)),
-    []
+    (title) => ApiCall(abortController).get(apiRelated(title)),
+    [abortController]
   );
   const search = Hooks.useCallback(
-    (searchInput) => ApiCall().get(apiSearch(searchInput)),
-    []
+    (searchInput) => ApiCall(abortController).get(apiSearch(searchInput)),
+    [abortController]
   );
   const getSourceUrl = Hooks.useCallback(
-    (title) => ApiCall().get(apiSourceUrl(title)),
-    []
+    (title) => ApiCall(abortController).get(apiSourceUrl(title)),
+    [abortController]
   );
 
-  const getRandom = Hooks.useCallback(() => ApiCall().get(apiRandom()), []);
+  const getRandom = Hooks.useCallback(
+    () => ApiCall(abortController).get(apiRandom()),
+    [abortController]
+  );
 
   const getStoriesOfMonth = Hooks.useCallback(
-    () => ApiCall().get(apiStoriesOfMonth()),
-    []
+    () => ApiCall(abortController).get(apiStoriesOfMonth()),
+    [abortController]
   );
+
+  Hooks.useEffect(() => {
+    return () => {
+      return abortController.abort();
+    };
+  }, [abortController]);
 
   return {
     getCategories,
