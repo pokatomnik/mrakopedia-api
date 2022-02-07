@@ -8,7 +8,8 @@
     "test": "npm run tscheck",
     "start": "vercel dev",
     "deploy:dev": "npm run tscheck && vercel",
-    "deploy:prod": "npm run tscheck && vercel --prod"
+    "deploy:prod": "npm run tscheck && vercel --prod",
+    "reindex": "ts-node scripts/ReadingTimeIndexer/bootstrap.ts"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,14 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.0.22",
+    "@types/node-fetch": "^2.5.12",
     "@vercel/node": "^1.8.0",
+    "cheerio": "^1.0.0-rc.10",
+    "node-fetch": "^2.6.7",
     "preact": "^10.4.7",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.6"
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
   },
   "dependencies": {
     "axios": "^0.21.2",
