@@ -40,7 +40,7 @@ async function withRetry<T>(promiseFactory: () => Promise<T>, times: number) {
     try {
       return await promiseFactory();
     } catch (e) {
-      lastError = e;
+      lastError = e instanceof Error ? e : new Error('Failed to fetch');
       --counter;
     }
   throw lastError;
