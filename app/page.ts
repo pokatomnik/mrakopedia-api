@@ -14,7 +14,12 @@ const DEFAULT_OPTIONS: IOptions = {
  * more feature-rich
  */
 export class Page {
+  private static DEFAULT_CHARACTERS_PER_MINUTE = 1500;
+
   private readonly options: IOptions;
+
+  private pagesIndex = require('../public/static/files/pages-index.json');
+
   constructor(
     private readonly title: string,
     private readonly html: string,
@@ -35,6 +40,13 @@ export class Page {
         ${this.capitalizedTitle}
       </h1>
     `;
+  }
+
+  private getReadingTime(): number | null {
+    const charsInPage = this.pagesIndex[this.title]?.readableCharacters ?? null;
+    return typeof charsInPage === 'number'
+      ? Math.ceil(charsInPage / Page.DEFAULT_CHARACTERS_PER_MINUTE)
+      : charsInPage;
   }
 
   private detailedTitle() {
@@ -58,9 +70,10 @@ export class Page {
     const heading = this.options.simpleTitle
       ? this.simpleTitle()
       : this.detailedTitle();
+    const readingTime = this.getReadingTime();
     return `
       <!doctype html>
-      <html>
+      <html lang="ru">
           <head>
               <meta charset="utf-8" />
               <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -80,6 +93,11 @@ export class Page {
           </head>
           <body>
               ${heading}
+              ${
+                readingTime !== null
+                  ? `<p><strong>Время на чтение, минут: ${readingTime}</strong></p>`
+                  : ''
+              }
               ${this.html}
           </body>
       </html>
