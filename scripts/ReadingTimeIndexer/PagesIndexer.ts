@@ -95,7 +95,13 @@ export class PagesIndexer {
     }
   }
 
-  public async start() {
+  public async indexPageByName(name: string) {
+    await this.init();
+    await this.processPage(name);
+    await this.flush();
+  }
+
+  public async indexAllPages() {
     await this.init();
     let categories: Array<ICategory> = [];
 

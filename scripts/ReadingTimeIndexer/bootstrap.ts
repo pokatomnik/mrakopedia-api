@@ -1,4 +1,7 @@
 import { join } from 'path';
+import { argv } from 'process';
+
+const args = argv.slice(2);
 
 import { LogFormatter } from './LogFormatter';
 import { PagesIndexer } from './PagesIndexer';
@@ -12,8 +15,16 @@ const pagesIndexer = new PagesIndexer({
   flushEvery: 5,
 });
 
-pagesIndexer
-  .start()
+const reindexPromise =
+  args.length === 0
+    ? pagesIndexer.indexAllPages()
+    : args.length === 1
+    ? pagesIndexer.indexPageByName(args[0])
+    : (() => {
+        throw new Error('Incorrect arguments');
+      })();
+
+reindexPromise
   .then(() => {
     console.log('Indexing done');
   })
