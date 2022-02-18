@@ -1,9 +1,7 @@
-export interface IPageMetaInfo {
-  readonly readableCharacters: number;
-}
+import type { IReadableCharactersInfo } from '../../app/IPagesMetaInfo';
 
 export interface IBufferIndex {
-  [K: string]: IPageMetaInfo | undefined;
+  [K: string]: IReadableCharactersInfo | undefined;
 }
 
 export interface ICategory {

@@ -11,7 +11,7 @@ const pagesIndexer = new PagesIndexer({
   logger: new LogFormatter('PageIndexer'),
   makeDelayEvery: 5,
   retriesNumber: 3,
-  sourceFilePath: join(process.cwd(), 'public/static/files/pages-index.json'),
+  sourceFilePath: join(process.cwd(), 'app/pages-index.json'),
   flushEvery: 5,
 });
 

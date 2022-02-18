@@ -1,5 +1,5 @@
 import { readFile, writeFile } from 'fs/promises';
-import type { IBufferIndex, ICategory, IPageMetaInfo } from './domain';
+import type { IBufferIndex, ICategory } from './domain';
 import {
   fetchPageTextAndRetry,
   getReadableCharacters,
@@ -8,6 +8,7 @@ import {
   delay,
 } from './api';
 import type { ILogger } from './ILogger';
+import { IReadableCharactersInfo } from '../../app/IPagesMetaInfo';
 
 interface IPageIndexerOptions {
   readonly retriesNumber: number;
@@ -19,7 +20,10 @@ interface IPageIndexerOptions {
 }
 
 export class PagesIndexer {
-  private readonly pageMetaInfoByTitle = new Map<string, IPageMetaInfo>();
+  private readonly pageMetaInfoByTitle = new Map<
+    string,
+    IReadableCharactersInfo
+  >();
 
   public constructor(private readonly options: IPageIndexerOptions) {}
 
