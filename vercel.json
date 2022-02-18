@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/pages-metainfo.ts": {
+      "includeFiles": "app/pages-index.json"
+    }
+  }
+}

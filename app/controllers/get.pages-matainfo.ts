@@ -70,7 +70,7 @@ function aggregate(
   return aggregated;
 }
 
-export async function getPagesMataInfo(_: unknown, response: NowResponse) {
+export async function getPagesMatainfo(_: unknown, response: NowResponse) {
   const ratingUrl = `${MRAKOPEDIA_ORIGIN}/wiki/${encodeURIComponent(
     'Рейтинг:Общий_рейтинг'
   )}`;
@@ -90,6 +90,7 @@ export async function getPagesMataInfo(_: unknown, response: NowResponse) {
     [html, json] = result.result;
     fetchingTook = result.took;
   } catch (e) {
+    console.error(e);
     return response
       .status(500)
       .json(Error('ERROR_FETCHING_DATA', STATUS_CODES[500] ?? ''));
@@ -109,6 +110,7 @@ export async function getPagesMataInfo(_: unknown, response: NowResponse) {
     response.setHeader('X-Parsing-Took', parsingTook);
     response.status(200).json(pagesMetaInfoIndex);
   } catch (e) {
+    console.error(e);
     response.status(500).json(Error('PARSE_ERROR', STATUS_CODES[500] ?? ''));
   }
 }
