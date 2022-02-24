@@ -2,10 +2,12 @@ import { capitalize } from './utils';
 
 interface IOptions {
   simpleTitle?: boolean;
+  head?: string;
 }
 
 const DEFAULT_OPTIONS: IOptions = {
   simpleTitle: false,
+  head: '',
 };
 
 /**
@@ -89,6 +91,7 @@ export class Page {
               <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap-reboot.css" />
               <link rel="stylesheet" href="/static/overrides.css" />
               <link rel="stylesheet" href="/static/custom-styles.css" />
+              ${this.options.head || ''}
               <title>${this.capitalizedTitle}</title>
           </head>
           <body>
